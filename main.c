@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/17 15:40:31 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/17 19:57:40 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void read_map(char *map,t_program *prg)
         i++;
         rows_allocated++;
     }
-    printf("row allocated %d\n",rows_allocated);
     validate_map(my_map,rows_allocated);
     check_map_character(my_map,rows_allocated);
+    floodfill_checker(my_map,row_allocated,ft_strlen(my_map[0]))
     close(fd);
 }
 

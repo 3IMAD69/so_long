@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:46 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/17 16:51:40 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/17 20:01:13 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ typedef struct	s_map {
 	int rows;
 	int colums;
 }				t_map;
+
+typedef struct s_position {
+	int x_row;
+	int y_colum;
+}				t_position;
+
 
 int	key_hook(int keycode, t_program *vars);
 int	close_prg(void);
