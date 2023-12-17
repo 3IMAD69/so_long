@@ -1,6 +1,6 @@
 NAME = so_long
-SRC = main.c keyhook.c includes/libft/ft_strnstr.c includes/libft/ft_strlen.c includes/libft/ft_strlcpy.c includes/libft/ft_memcpy.c\
-	includes/libft/ft_strncmp.c includes/get_next_line/get_next_line.c includes/get_next_line/get_next_line_utils.c
+SRC = main.c keyhook.c check_map.c includes/libft/ft_strnstr.c includes/libft/ft_strlen.c includes/libft/ft_strlcpy.c includes/libft/ft_memcpy.c\
+	includes/libft/ft_strncmp.c includes/libft/ft_strchr.c includes/get_next_line/get_next_line.c includes/get_next_line/get_next_line_utils.c
 OBJ = $(SRC:.c=.o)
 
 FLAGS = -Wall  -Werror
@@ -39,10 +39,10 @@ all: $(NAME)
 
 # re: fclean all
 
-
+# -g -fsanitize=address
 $(NAME):  	$(SRCS)
-	gcc $(FLAGS) $(LINKS) $(SRC) -o $(NAME) -g -fsanitize=address
-	@echo "\033[0;32mso_long is ready"
+	gcc $(FLAGS) $(LINKS) $(SRC) -o $(NAME)
+	@echo "\033[0;32mso_long is ready\033[0m"
 
 clean:
 	@$(RM) $(NAME)

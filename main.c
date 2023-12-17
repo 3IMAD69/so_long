@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/17 11:43:26 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/17 15:40:31 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int print_error(char *str)
 {
+    printf("Error\n");
     printf("%s",str);
     exit(0);
 }
@@ -36,7 +37,7 @@ void *ft_realloc(void *ptr, size_t size,size_t old_size)
     return new_ptr;
 }
 
-void read_map(char *map)
+void read_map(char *map,t_program *prg)
 {
     char *buffer;
     char **my_map = NULL;
@@ -49,6 +50,8 @@ void read_map(char *map)
     while ((buffer = get_next_line(fd)))
     {
         my_map = ft_realloc(my_map,(rows_allocated + 1) * sizeof(char *),(rows_allocated) * sizeof(char *));
+        if (buffer[ft_strlen(buffer) - 1] == '\n')
+            buffer[ft_strlen(buffer) - 1] = '\0';
         my_map[i] = (char *)malloc(sizeof(char) * ft_strlen(buffer) + 1);
         if (!my_map[i])
             print_error("Allocation failed");
@@ -57,22 +60,12 @@ void read_map(char *map)
         i++;
         rows_allocated++;
     }
-    int j = 0;
-    while(j < i)
-    {
-        printf("%c", my_map[j][20]);
-        j++;
-    }
-     // Free the allocated memory
-    for (j = 0; j < i; j++)
-    {
-        free(my_map[j]);
-    }
-    free(my_map);
-    // if (buffer)
-    //     printf("%s",buffer);
+    printf("row allocated %d\n",rows_allocated);
+    validate_map(my_map,rows_allocated);
+    check_map_character(my_map,rows_allocated);
     close(fd);
 }
+
 int main(int argc,char *argv[])
 {
     t_program prg;
@@ -84,10 +77,11 @@ int main(int argc,char *argv[])
         print_error("Two Many Argument. Only one map needed!");
     else if (!ft_strnstr(argv[1],".ber",ft_strlen(argv[1])))
         print_error("Wrong Map Extention , '.ber' are the only extentions supported!!");
-    read_map(argv[1]);
-
+    read_map(argv[1],&prg);
+    
     prg.mlx = mlx_init();
-    prg.win = mlx_new_window(prg.mlx,640,480,"Window xXx");
+    //prg.win = mlx_new_window(prg.mlx,prg.height,prg.width,"Window xXx");
+    prg.win = mlx_new_window(prg.mlx,800,600,"Window xXx");
 
     // void *img;
     // int img_width = 0;
@@ -103,4 +97,6 @@ int main(int argc,char *argv[])
     mlx_key_hook(prg.win,key_hook,&prg);
     mlx_hook(prg.win, 17, 0, close_prg, &prg);
     mlx_loop(prg.mlx);
+
+    system("leaks a.out");
 }
