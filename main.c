@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/18 16:59:28 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/18 17:01:33 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int main(int argc,char *argv[])
     else if (!ft_strnstr(argv[1],".ber",ft_strlen(argv[1])))
         print_error("Wrong Map Extention , '.ber' are the only extentions supported!!");
     read_map(argv[1],&prg,&map);
-    
     prg.mlx = mlx_init();
     prg.win = mlx_new_window(prg.mlx,prg.height,prg.width,"Window xXx");
     display_map(prg,map);
