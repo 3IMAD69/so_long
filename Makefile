@@ -1,5 +1,5 @@
 NAME = so_long
-SRC = main.c keyhook.c check_map.c includes/libft/ft_strnstr.c includes/libft/ft_strlen.c includes/libft/ft_strlcpy.c includes/libft/ft_memcpy.c\
+SRC = main.c keyhook.c check_map.c check_map2.c check_map3.c includes/libft/ft_strnstr.c includes/libft/ft_strlen.c includes/libft/ft_strlcpy.c includes/libft/ft_memcpy.c\
 	includes/libft/ft_strncmp.c includes/libft/ft_strchr.c includes/get_next_line/get_next_line.c includes/get_next_line/get_next_line_utils.c
 OBJ = $(SRC:.c=.o)
 

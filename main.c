@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/17 19:57:40 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/18 12:57:30 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ void read_map(char *map,t_program *prg)
     }
     validate_map(my_map,rows_allocated);
     check_map_character(my_map,rows_allocated);
-    floodfill_checker(my_map,row_allocated,ft_strlen(my_map[0]))
+    check_map_if_enclosed(my_map,rows_allocated,ft_strlen(my_map[0]));
+    floodfill_checker(my_map,rows_allocated,ft_strlen(my_map[0]),get_entity_pos(my_map,rows_allocated,'P'));
+    prg->height = ft_strlen(my_map[0]) * 100;
+    prg->width = rows_allocated * 100;
     close(fd);
 }
 
@@ -81,7 +84,7 @@ int main(int argc,char *argv[])
     
     prg.mlx = mlx_init();
     //prg.win = mlx_new_window(prg.mlx,prg.height,prg.width,"Window xXx");
-    prg.win = mlx_new_window(prg.mlx,800,600,"Window xXx");
+    prg.win = mlx_new_window(prg.mlx,prg.height,prg.width,"Window xXx");
 
     // void *img;
     // int img_width = 0;
