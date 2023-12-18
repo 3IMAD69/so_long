@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/18 12:57:30 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/18 16:59:28 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void *ft_realloc(void *ptr, size_t size,size_t old_size)
     return new_ptr;
 }
 
-void read_map(char *map,t_program *prg)
+void read_map(char *argv,t_program *prg,t_map *map)
 {
     char *buffer;
     char **my_map = NULL;
     int i = 0;
     int rows_allocated = 0;
-    int fd = open(map,O_RDONLY);
+    int fd = open(argv,O_RDONLY);
     
     if (fd == -1)
         print_error("Map Not Found!");
@@ -64,14 +64,18 @@ void read_map(char *map,t_program *prg)
     check_map_character(my_map,rows_allocated);
     check_map_if_enclosed(my_map,rows_allocated,ft_strlen(my_map[0]));
     floodfill_checker(my_map,rows_allocated,ft_strlen(my_map[0]),get_entity_pos(my_map,rows_allocated,'P'));
-    prg->height = ft_strlen(my_map[0]) * 100;
-    prg->width = rows_allocated * 100;
+    prg->height = ft_strlen(my_map[0]) * 64;
+    prg->width = rows_allocated * 64;
+    map->map_arr = my_map;
+    map->rows = rows_allocated;
+    map->colums = ft_strlen(my_map[0]);
     close(fd);
 }
 
 int main(int argc,char *argv[])
 {
     t_program prg;
+    t_map map;
     
     printf("Welcome to my game\n");
     if (argc < 2)
@@ -80,23 +84,11 @@ int main(int argc,char *argv[])
         print_error("Two Many Argument. Only one map needed!");
     else if (!ft_strnstr(argv[1],".ber",ft_strlen(argv[1])))
         print_error("Wrong Map Extention , '.ber' are the only extentions supported!!");
-    read_map(argv[1],&prg);
+    read_map(argv[1],&prg,&map);
     
     prg.mlx = mlx_init();
-    //prg.win = mlx_new_window(prg.mlx,prg.height,prg.width,"Window xXx");
     prg.win = mlx_new_window(prg.mlx,prg.height,prg.width,"Window xXx");
-
-    // void *img;
-    // int img_width = 0;
-    // int img_height = 0 ;
-
-    // img = mlx_xpm_file_to_image(prg.mlx,"./textures/LAVAROCKS.xpm",&img_width,&img_height);
-    // if (!img)
-    //     print_error("Failed to read img");
-    // mlx_put_image_to_window(prg.mlx,prg.win,img,0,50);
-
-
-
+    display_map(prg,map);
     mlx_key_hook(prg.win,key_hook,&prg);
     mlx_hook(prg.win, 17, 0, close_prg, &prg);
     mlx_loop(prg.mlx);
