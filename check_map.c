@@ -48,17 +48,21 @@ void checker_character_helper(char **my_map,t_map *map,int rows)
         print_error("Map is Invalid !!");
     }
 }
+int init_my_player(t_player *player,int x, int y)
+{
+    player->x = x;
+    player->y = y;
+    return (1);
+}
 
-void check_map_character(char **my_map,int rows)
+void check_map_character(char **my_map,int rows,t_program *prg)
 {
     int i;
     int j;
     t_map map;
 
     i = 0;
-    map.exit = 0;
-    map.coin = 0;
-    map.player_pos = 0;
+    ft_memset(&map,0,sizeof(t_map));
     while (i < rows)
     {
         j = 0;
@@ -71,7 +75,8 @@ void check_map_character(char **my_map,int rows)
             }
             map.exit += (my_map[i][j] == 'E');
             map.coin += (my_map[i][j] == 'C');
-            map.player_pos += (my_map[i][j++] == 'P');
+            map.player_pos += (my_map[i][j] == 'P') && init_my_player(&(prg->player),j,i);
+            j++;
         }
         i++;
     }

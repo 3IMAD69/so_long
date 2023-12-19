@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/18 17:01:33 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/19 18:43:04 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void read_map(char *argv,t_program *prg,t_map *map)
         rows_allocated++;
     }
     validate_map(my_map,rows_allocated);
-    check_map_character(my_map,rows_allocated);
+    check_map_character(my_map,rows_allocated,prg);
     check_map_if_enclosed(my_map,rows_allocated,ft_strlen(my_map[0]));
     floodfill_checker(my_map,rows_allocated,ft_strlen(my_map[0]),get_entity_pos(my_map,rows_allocated,'P'));
     prg->height = ft_strlen(my_map[0]) * 64;
@@ -87,7 +87,9 @@ int main(int argc,char *argv[])
     read_map(argv[1],&prg,&map);
     prg.mlx = mlx_init();
     prg.win = mlx_new_window(prg.mlx,prg.height,prg.width,"Window xXx");
-    display_map(prg,map);
+    prg.player.moves = 0;
+    display_map(prg,map,&(prg.player));
+    prg.map = map;
     mlx_key_hook(prg.win,key_hook,&prg);
     mlx_hook(prg.win, 17, 0, close_prg, &prg);
     mlx_loop(prg.mlx);
