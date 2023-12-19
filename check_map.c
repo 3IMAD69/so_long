@@ -59,10 +59,9 @@ void check_map_character(char **my_map,int rows,t_program *prg)
 {
     int i;
     int j;
-    t_map map;
 
     i = 0;
-    ft_memset(&map,0,sizeof(t_map));
+    ft_memset(&(prg->map),0,sizeof(t_map));
     while (i < rows)
     {
         j = 0;
@@ -73,13 +72,13 @@ void check_map_character(char **my_map,int rows,t_program *prg)
                 free_my_map(my_map,rows);
                 print_error("Character Not Allowed !!");
             }
-            map.exit += (my_map[i][j] == 'E');
-            map.coin += (my_map[i][j] == 'C');
-            map.player_pos += (my_map[i][j] == 'P') && init_my_player(&(prg->player),j,i);
+            prg->map.exit += (my_map[i][j] == 'E');
+            prg->map.coin += (my_map[i][j] == 'C');
+            prg->map.player_pos += (my_map[i][j] == 'P') && init_my_player(&(prg->player),j,i);
             j++;
         }
         i++;
     }
-    checker_character_helper(my_map,&map,rows);
+    checker_character_helper(my_map,&(prg->map),rows);
 }
 

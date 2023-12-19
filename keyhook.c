@@ -1,9 +1,33 @@
 #include "header.h"
 
+void check_for_coins(t_program *prg,char next_place)
+{
+    if (next_place == 'C')
+    {
+        prg->player.coins_collected++;  
+    }
+}
+
+void chec_for_ending(t_program *prg,char next_place)
+{
+    printf("coins collected -> %d!\n",prg->player.coins_collected);
+    printf("map coin -> %d!\n",prg->map.coin);
+    if (next_place == 'E' && prg->player.coins_collected == prg->map.coin)
+    {
+        printf("khruj db");
+    }else if (next_place == 'E' && prg->player.coins_collected != prg->map.coin )
+        printf("ba9i");
+}
+
 int handle_player_move_vertical(t_program *prg,int offset)
 {
-    if (prg->map.map_arr[prg->player.y + offset][prg->player.x] == '1')
+    char next_place;
+
+    next_place = prg->map.map_arr[prg->player.y + offset][prg->player.x];
+    if (next_place == '1')
         return (0);
+    check_for_coins(prg,next_place);
+    chec_for_ending(prg,next_place);
     mlx_destroy_image(prg->mlx,prg->player.img_ptr);
     display_player(*prg,prg->map,"./textures/wall.xpm",&(prg->player));
     prg->player.y = prg->player.y + offset;
@@ -17,8 +41,13 @@ int handle_player_move_vertical(t_program *prg,int offset)
 
 int handle_player_move_horizontal(t_program *prg,int offset)
 {
-    if (prg->map.map_arr[prg->player.y][prg->player.x + offset] == '1')
+    char next_place;
+
+    next_place = prg->map.map_arr[prg->player.y][prg->player.x + offset];
+    if (next_place == '1')
         return (0);
+    check_for_coins(prg,next_place);
+    chec_for_ending(prg,next_place);
     mlx_destroy_image(prg->mlx,prg->player.img_ptr);
     display_player(*prg,prg->map,"./textures/wall.xpm",&(prg->player));
     prg->player.x = prg->player.x + offset;
@@ -33,17 +62,6 @@ int handle_player_move_horizontal(t_program *prg,int offset)
 
 int	key_hook(int keycode,t_program *prg)
 {
-    // if (keycode == 53) //ESC
-    //     exit(0);
-    // if (keycode == 13 || keycode == 126)
-    //     prg->player.moves += handle_player_move_up(prg);
-    // if (keycode == 1 || keycode == 125)
-    //     prg->player.moves += handle_player_move_down(prg);
-    // if (keycode == 2 || keycode == 124)
-    //     prg->player.moves += handle_player_move_right(prg);
-    // if (keycode == 0 || keycode == 123)
-    //     prg->player.moves += handle_player_move_left(prg);
-
     if (keycode == 53) //ESC
         exit(0);
     if (keycode == 13 || keycode == 126)

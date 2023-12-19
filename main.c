@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/19 18:43:04 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/19 21:27:54 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void read_map(char *argv,t_program *prg,t_map *map)
 int main(int argc,char *argv[])
 {
     t_program prg;
-    t_map map;
     
     printf("Welcome to my game\n");
     if (argc < 2)
@@ -84,12 +83,11 @@ int main(int argc,char *argv[])
         print_error("Two Many Argument. Only one map needed!");
     else if (!ft_strnstr(argv[1],".ber",ft_strlen(argv[1])))
         print_error("Wrong Map Extention , '.ber' are the only extentions supported!!");
-    read_map(argv[1],&prg,&map);
+    read_map(argv[1],&prg,&(prg.map));
     prg.mlx = mlx_init();
     prg.win = mlx_new_window(prg.mlx,prg.height,prg.width,"Window xXx");
     prg.player.moves = 0;
-    display_map(prg,map,&(prg.player));
-    prg.map = map;
+    display_map(prg,prg.map,&(prg.player));
     mlx_key_hook(prg.win,key_hook,&prg);
     mlx_hook(prg.win, 17, 0, close_prg, &prg);
     mlx_loop(prg.mlx);
