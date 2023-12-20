@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/19 21:27:54 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/20 11:21:02 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,11 @@ int main(int argc,char *argv[])
     prg.win = mlx_new_window(prg.mlx,prg.height,prg.width,"Window xXx");
     prg.player.moves = 0;
     display_map(prg,prg.map,&(prg.player));
+    
+    mlx_string_put(prg.mlx,prg.win, 0, 0, 0x00FF0000, "MOVES");
+    
     mlx_key_hook(prg.win,key_hook,&prg);
     mlx_hook(prg.win, 17, 0, close_prg, &prg);
     mlx_loop(prg.mlx);
-
-    system("leaks a.out");
+    system("leaks so_long");
 }

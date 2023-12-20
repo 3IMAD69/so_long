@@ -1,19 +1,5 @@
 #include "header.h"
 
-void floodfill_recursive(char **map,int rows, int colums,int xrow,int ycolum)
-{
-    // printf("Player pos x = %d %d / y = %d %d\n",xrow,rows,ycolum,colums);
-    if (xrow < 0 || ycolum < 0 || xrow >= rows || ycolum >= colums 
-        || (map[xrow][ycolum] != '0' && map[xrow][ycolum] != 'E'  && map[xrow][ycolum] != 'C' && map[xrow][ycolum] != 'P'))
-        return ;
-    // printf("after flood filling..\n");
-    map[xrow][ycolum] = '7';
-    floodfill_recursive(map,rows,colums,xrow - 1,ycolum);
-    floodfill_recursive(map,rows,colums,xrow + 1,ycolum);
-    floodfill_recursive(map,rows,colums,xrow,ycolum - 1);
-    floodfill_recursive(map,rows,colums,xrow,ycolum + 1);
-}
-
 void printMap(char **map, int rows, int columns) {
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < columns; ++j) {
@@ -23,6 +9,23 @@ void printMap(char **map, int rows, int columns) {
     }
     printf("\n");
 }
+
+void floodfill_recursive(char **map,int rows, int colums,int xrow,int ycolum)
+{
+    // printf("Player pos x = %d %d / y = %d %d\n",xrow,rows,ycolum,colums);
+    if (xrow < 0 || ycolum < 0 || xrow >= rows || ycolum >= colums 
+        || (map[xrow][ycolum] != '0' && map[xrow][ycolum] != 'E' && map[xrow][ycolum] != 'C' && map[xrow][ycolum] != 'P'))
+        return ;
+    if (map[xrow][ycolum] == 'E' && (map[xrow][ycolum] = 'B'))
+        return;
+    else
+        map[xrow][ycolum] = '7';
+    floodfill_recursive(map,rows,colums,xrow - 1,ycolum);
+    floodfill_recursive(map,rows,colums,xrow + 1,ycolum);
+    floodfill_recursive(map,rows,colums,xrow,ycolum - 1);
+    floodfill_recursive(map,rows,colums,xrow,ycolum + 1);
+}
+
 
 void floodfill_checker(char **map,int rows, int colums,t_position entity)
 {
@@ -34,7 +37,7 @@ void floodfill_checker(char **map,int rows, int colums,t_position entity)
     printMap(copy_map,rows,colums);
     floodfill_recursive(copy_map,rows,colums,entity.x_row,entity.y_colum);
     printMap(copy_map,rows,colums);
-    if (copy_map[exit_pos.x_row][exit_pos.y_colum] == '7')
+    if (copy_map[exit_pos.x_row][exit_pos.y_colum] == 'B')
     {
         check_if_all_coins_reachable(map,copy_map,rows);
         free_my_map(copy_map,rows);

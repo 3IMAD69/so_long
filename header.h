@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:46 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/19 19:14:01 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/20 10:28:20 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_position
 
 
 int			key_hook(int keycode,t_program *prg);
-int			close_prg(void);
+int			close_prg(t_program *);
 void		validate_map(char **my_map, int rows);
 void		check_map_character(char **my_map, int rows,t_program *prg);
 void		free_my_map(char **my_map, int rows);
