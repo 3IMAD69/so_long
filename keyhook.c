@@ -1,10 +1,21 @@
 #include "header.h"
 
+void playSoundAsync(char *path) {
+    pid_t pid = fork();
+    if (pid == 0) {
+        // Child process
+        execlp("afplay", "afplay", path, NULL);
+    }
+    // Parent process continues immediately
+}
+
 void check_for_coins(t_program *prg,char next_place)
 {
     if (next_place == 'C')
     {
-        prg->player.coins_collected++;  
+        prg->player.coins_collected++; 
+        playSoundAsync("sounds/collect_coin.mp3");
+        mlx_string_put(prg->mlx,prg->win, 0, 0, 0xFFFFFFFF, "MOVES : 7");
     }
 }
 
@@ -12,13 +23,17 @@ int check_for_ending(t_program *prg,char next_place)
 {
     if (next_place == 'E' && prg->player.coins_collected == prg->map.coin)
     {
+        playSoundAsync("sounds/door-slam.mp3");
         printf("You won!");
         //free_my_map(prg->map.map_arr,prg->map.rows);
-        system("leaks so_long");
+        //system("leaks so_long");
         exit(0);
     }
-    else if (next_place == 'E' && prg->player.coins_collected != prg->map.coin )
+    else if (next_place == 'E' && prg->player.coins_collected != prg->map.coin)
+    {
+        playSoundAsync("sounds/door-locked.mp3");
         return (0);
+    }
     else 
         return (1);
 }
@@ -40,6 +55,7 @@ int handle_player_move_vertical(t_program *prg,int offset)
         prg->map.map_arr[prg->player.y][prg->player.x] = 'P'; 
         prg->map.map_arr[prg->player.y - offset][prg->player.x] = '0';
     }
+    playSoundAsync("sounds/move_sound.mp3");
     prg->player.moves++;
     printf("Moves -> %d!\n",prg->player.moves);
     return (1);
@@ -62,6 +78,7 @@ int handle_player_move_horizontal(t_program *prg,int offset)
         prg->map.map_arr[prg->player.y][prg->player.x] = 'P'; 
         prg->map.map_arr[prg->player.y][prg->player.x - offset] = '0';
     }
+    playSoundAsync("sounds/move_sound.mp3");
     prg->player.moves++;
     printf("Moves -> %d!\n",prg->player.moves);
     return (1);
