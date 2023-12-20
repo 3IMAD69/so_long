@@ -42,26 +42,7 @@ void display_player(t_program prg,t_map map,char *path,t_player *player)
     img_ptr = mlx_xpm_file_to_image(prg.mlx, path, &img_width, &img_height);
     player->img_ptr = img_ptr;
     mlx_put_image_to_window(prg.mlx,prg.win,img_ptr,(player->x * 64),(player->y * 64));
-    // while (i < map.rows)
-    // {
-    //     j = 0;
-    //     while (map.map_arr[i][j] != '\0')
-    //     {
-    //         if (map.map_arr[i][j] == 'P')
-    //         {
-    //             player->x = (j * 64);
-    //             player->y = (i * 64);
-    //             mlx_put_image_to_window(prg.mlx,prg.win,img_ptr,player->x,player->y);
-    //         }
-    //         j++;
-    //     }
-    //     i++;
-    // }
 }
-
-
-
-
 
 void display_map(t_program prg,t_map map,t_player *player)
 {

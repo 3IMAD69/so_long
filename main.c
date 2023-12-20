@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/20 12:58:35 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/20 15:46:40 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int main(int argc,char *argv[])
     display_map(prg,prg.map,&(prg.player));
     
     mlx_string_put(prg.mlx,prg.win, 0, 0, 0xFFFFFFFF, "MOVES : 0");
+    mlx_string_put(prg.mlx,prg.win, (prg.map.colums - 1.5) * 64, 0, 0xFFFFFFFF, "COINS : 0");
     
     mlx_key_hook(prg.win,key_hook,&prg);
     //mlx_loop_hook(prg.mlx,ft_animation,&prg);
