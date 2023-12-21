@@ -9,7 +9,7 @@ char **create_copy_map(char **map,int rows,int colums)
     copy_map = (char **)malloc(rows * sizeof(char *));
     while (i < rows)
     {
-        copy_map[i] = (char *)malloc(colums * sizeof(char));
+        copy_map[i] = (char *)malloc(colums + 1 * sizeof(char));
         ft_strlcpy(copy_map[i],map[i],colums + 1);
         i++;
     }

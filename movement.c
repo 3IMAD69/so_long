@@ -10,11 +10,11 @@ void handle_all_move(t_program *prg)
     playSoundAsync("sounds/move_sound.mp3");
     prg->player.moves++;
     printf("Moves -> %d!\n",prg->player.moves);
-    img_ptr = mlx_xpm_file_to_image(prg->mlx, "./textures/wall3.xpm", &img_width, &img_height);
-    mlx_put_image_to_window(prg->mlx,prg->win,img_ptr,0,0); 
-    mlx_put_image_to_window(prg->mlx,prg->win,img_ptr,64,0); 
-    moves_char = ft_itoa(prg->player.moves);
-    mlx_string_put(prg->mlx,prg->win, 0, 0, 0xFFFFFFFF, ft_strjoin("MOVES : ",moves_char));
+    //img_ptr = mlx_xpm_file_to_image(prg->mlx, "./textures/wall3.xpm", &img_width, &img_height);
+    //mlx_put_image_to_window(prg->mlx,prg->win,img_ptr,0,0); 
+    //mlx_put_image_to_window(prg->mlx,prg->win,img_ptr,64,0); 
+    //moves_char = ft_itoa(prg->player.moves);
+    //mlx_string_put(prg->mlx,prg->win, 0, 0, 0xFFFFFFFF, ft_strjoin("MOVES : ",moves_char));
 }
 
 void check_for_coins(t_program *prg,char next_place)
@@ -27,10 +27,10 @@ void check_for_coins(t_program *prg,char next_place)
     if (next_place == 'C')
     {
         prg->player.coins_collected++; 
-        playSoundAsync("sounds/collect_coin.mp3");
-        img_ptr = mlx_xpm_file_to_image(prg->mlx, "./textures/wall3.xpm", &img_width, &img_height);
-        mlx_put_image_to_window(prg->mlx,prg->win,img_ptr,(prg->map.colums * 64) - 64,0);
-        mlx_put_image_to_window(prg->mlx,prg->win,img_ptr,prg->map.colums * 64,0); 
+        //playSoundAsync("sounds/collect_coin.mp3");
+        //img_ptr = mlx_xpm_file_to_image(prg->mlx, "./textures/wall3.xpm", &img_width, &img_height);
+        //mlx_put_image_to_window(prg->mlx,prg->win,img_ptr,(prg->map.colums * 64) - 64,0);
+        //mlx_put_image_to_window(prg->mlx,prg->win,img_ptr,prg->map.colums * 64,0); 
         coins_char = ft_itoa(prg->player.coins_collected);
         mlx_string_put(prg->mlx,prg->win, (prg->map.colums - 1.5) * 64, 0, 0xFFFFFFFF, ft_strjoin("COINS : ",ft_itoa(prg->player.coins_collected)));
         free(coins_char);
@@ -87,10 +87,10 @@ int handle_player_move_horizontal(t_program *prg,int offset)
     check_for_coins(prg,next_place);
     if (check_for_ending(prg,next_place) == 1)
     {
-        mlx_destroy_image(prg->mlx,prg->player.img_ptr);
-        display_player(*prg,prg->map,"./textures/wall.xpm",&(prg->player));
+       // mlx_destroy_image(prg->mlx,prg->player.img_ptr);
+        //display_player(*prg,prg->map,"./textures/wall.xpm",&(prg->player));
         prg->player.x = prg->player.x + offset;
-        display_player(*prg,prg->map,"./textures/player.xpm",&(prg->player));    
+       // display_player(*prg,prg->map,"./textures/player.xpm",&(prg->player));    
         prg->map.map_arr[prg->player.y][prg->player.x] = 'P'; 
         prg->map.map_arr[prg->player.y][prg->player.x - offset] = '0';
         handle_all_move(prg);

@@ -1,15 +1,15 @@
 #include "header.h"
 
-void playSoundAsync(char *path) 
-{
-    pid_t pid = fork();
-    if (pid == 0) {
-        // Child process
-        execlp("afplay", "afplay", path, NULL);
-    }
-    // Parent process continues immediately
-}
+void playSoundAsync(char *path) {
+    // Use "afplay" in the background with "&" to run asynchronously
+    char command[256];
 
+    //snprintf(command, sizeof(command), "afplay %s &", path);
+    ft_strlcpy(command,"afplay ",sizeof(command));
+    ft_strlcat(command,path,sizeof(command));
+    ft_strlcat(command," &",sizeof(command));
+    system(command);
+}
 int	key_hook(int keycode,t_program *prg)
 {
     if (keycode == 53 ) //ESC
