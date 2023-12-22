@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:46 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/21 14:21:00 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/22 13:17:15 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ typedef struct s_animation
 	int		frames;
 	int 	img_widght;
 	int 	img_height;
-	void 	**frames_arr[25];
+	unsigned int		offset;
+	void 	**frames_arr[60];
 }		t_animation;
 
 typedef struct s_player 
@@ -61,6 +62,9 @@ typedef struct s_program
 	t_player player;
 	int 	frames;
 	t_animation coin;
+	t_animation wall_animated;
+	t_animation snow;
+	t_animation player_anim;
 }			t_program;
 
 
@@ -84,7 +88,7 @@ void		check_map_if_enclosed(char **my_map, int rows, int colums);
 void		check_if_all_coins_reachable(char **real_map, char **fake_map,
 				int rows);
 char		**create_copy_map(char **map, int rows, int colums);
-void 	display_map(t_program prg,t_map map,t_player *player,int frame_offset);
+void 	display_map(t_program prg,t_map map,t_player *player);
 void 		display_player(t_program prg,t_map map,char *path,t_player *player);
 
 void handle_all_move(t_program *prg);
@@ -94,7 +98,7 @@ int handle_player_move_vertical(t_program *prg,int offset);
 int handle_player_move_horizontal(t_program *prg,int offset);
 void playSoundAsync(char *path);
 int 		ft_animation(t_program *prg);
-
+void handle_status_printed(t_program *prg);
 
 
 void printMap(char **map, int rows, int columns);

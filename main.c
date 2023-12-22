@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/21 12:54:59 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/22 13:02:35 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,62 @@ void read_map(char *argv,t_program *prg,t_map *map)
 
 void init_coin(t_program *prg)
 {
+    prg->coin.offset = 0;
     prg->coin.frames_arr[0] = mlx_xpm_file_to_image(prg->mlx,"./animation/coin/coin0.xpm",&(prg->coin.img_widght),&(prg->coin.img_height));
     prg->coin.frames_arr[1] = mlx_xpm_file_to_image(prg->mlx,"./animation/coin/coin1.xpm",&(prg->coin.img_widght),&(prg->coin.img_height));
     prg->coin.frames_arr[2] = mlx_xpm_file_to_image(prg->mlx,"./animation/coin/coin2.xpm",&(prg->coin.img_widght),&(prg->coin.img_height));
     prg->coin.frames_arr[3] = mlx_xpm_file_to_image(prg->mlx,"./animation/coin/coin3.xpm",&(prg->coin.img_widght),&(prg->coin.img_height));
     prg->coin.frames_arr[4] = mlx_xpm_file_to_image(prg->mlx,"./animation/coin/coin4.xpm",&(prg->coin.img_widght),&(prg->coin.img_height));
     prg->coin.frames_arr[5] = mlx_xpm_file_to_image(prg->mlx,"./animation/coin/coin5.xpm",&(prg->coin.img_widght),&(prg->coin.img_height));
+}
+
+// void init_wall(t_program *prg)
+// {
+//     int i = 0;
+//     char file_path[100];
+
+//     while (i <= 41)
+//     {
+//         ft_strlcpy(file_path,"./animation/wall/wall",sizeof(file_path));
+//         ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
+//         ft_strlcat(file_path,".xpm",sizeof(file_path));
+//         prg->wall_animated.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->wall_animated.img_widght),&(prg->wall_animated.img_height));
+//         i++;
+//     }
+// }
+
+void init_snow(t_program *prg)
+{
+    int i = 0;
+    char file_path[100];
+
+    prg->snow.offset = 0;
+    while (i <= 4)
+    {
+        ft_strlcpy(file_path,"./animation/snow/snow",sizeof(file_path));
+        ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
+        ft_strlcat(file_path,".xpm",sizeof(file_path));
+        printf("%s \n",file_path);
+        prg->snow.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->snow.img_widght),&(prg->snow.img_height));
+        i++;
+    }
+}
+
+void init_player(t_program *prg)
+{
+    int i = 0;
+    char file_path[100];
+
+    prg->player_anim.offset = 0;
+    while (i <= 7)
+    {
+        ft_strlcpy(file_path,"./animation/player/idle/idle",sizeof(file_path));
+        ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
+        ft_strlcat(file_path,".xpm",sizeof(file_path));
+        printf("%s \n",file_path);
+        prg->player_anim.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->player_anim.img_widght),&(prg->player_anim.img_height));
+        i++;
+    }
 }
 
 int main(int argc,char *argv[])
@@ -97,13 +147,15 @@ int main(int argc,char *argv[])
     prg.mlx = mlx_init();
     prg.win = mlx_new_window(prg.mlx,prg.height,prg.width,"Window xXx");
     prg.player.moves = 0;
+    prg.player.coins_collected = 0;
     prg.frames = 0;
     init_coin(&prg);
-    display_map(prg,prg.map,&(prg.player),0);
+    init_snow(&prg);
+    init_player(&prg);
+    //display_map(prg,prg.map,&(prg.player),1);
 
-    mlx_string_put(prg.mlx,prg.win, 0, 0, 0xFFFFFFFF, "MOVES : 0");
-    mlx_string_put(prg.mlx,prg.win, (prg.map.colums - 1.5) * 64, 0, 0xFFFFFFFF, "COINS : 0");
-    
+    //mlx_string_put(prg.mlx,prg.win, 0, 0, 0xFFFFFFFF, "MOVES : 0");
+    //mlx_string_put(prg.mlx,prg.win, (prg.map.colums - 1.5) * 64, 0, 0xFFFFFFFF, "COINS 🪙: 0");
     mlx_key_hook(prg.win,key_hook,&prg);
     mlx_loop_hook(prg.mlx,ft_animation,&prg);
     mlx_hook(prg.win, 17, 0, close_prg, &prg);

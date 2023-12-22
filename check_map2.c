@@ -18,8 +18,7 @@ void floodfill_recursive(char **map,int rows, int colums,int xrow,int ycolum)
         return ;
     if (map[xrow][ycolum] == 'E' && (map[xrow][ycolum] = 'B'))
         return;
-    else
-        map[xrow][ycolum] = '7';
+    map[xrow][ycolum] = '7';
     floodfill_recursive(map,rows,colums,xrow - 1,ycolum);
     floodfill_recursive(map,rows,colums,xrow + 1,ycolum);
     floodfill_recursive(map,rows,colums,xrow,ycolum - 1);
@@ -34,9 +33,9 @@ void floodfill_checker(char **map,int rows, int colums,t_position entity)
 
     copy_map = create_copy_map(map,rows,colums);
     exit_pos = get_entity_pos(map,rows,'E');
-    printMap(copy_map,rows,colums);
+    //printMap(copy_map,rows,colums);
     floodfill_recursive(copy_map,rows,colums,entity.x_row,entity.y_colum);
-    printMap(copy_map,rows,colums);
+    //printMap(copy_map,rows,colums);
     if (copy_map[exit_pos.x_row][exit_pos.y_colum] == 'B')
     {
         check_if_all_coins_reachable(map,copy_map,rows);

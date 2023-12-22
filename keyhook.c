@@ -10,6 +10,20 @@ void playSoundAsync(char *path) {
     ft_strlcat(command," &",sizeof(command));
     system(command);
 }
+
+void handle_status_printed(t_program *prg)
+{
+    char *coins_char;
+    char *moves_char;
+
+    moves_char = ft_itoa(prg->player.moves);
+    mlx_string_put(prg->mlx,prg->win, 0, 0, 0xFFFFFFFF, ft_strjoin("MOVES : ",moves_char));
+    coins_char = ft_itoa(prg->player.coins_collected);
+    mlx_string_put(prg->mlx,prg->win, (prg->map.colums - 1.5) * 64, 0, 0xFFFFFFFF, ft_strjoin("COINS : ",ft_itoa(prg->player.coins_collected)));
+    free(coins_char);
+    free(moves_char);
+}
+
 int	key_hook(int keycode,t_program *prg)
 {
     if (keycode == 53 ) //ESC

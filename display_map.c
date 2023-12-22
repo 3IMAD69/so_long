@@ -70,14 +70,16 @@ void display_player(t_program prg,t_map map,char *path,t_player *player)
     mlx_put_image_to_window(prg.mlx,prg.win,img_ptr,(player->x * 64),(player->y * 64));
 }
 
-void display_map(t_program prg,t_map map,t_player *player,int frame_offset)
+void display_map(t_program prg,t_map map,t_player *player)
 {
-    display_helper(prg,map,"./textures/wall.xpm","0CP");
-    display_helper(prg,map,"./textures/wall3.xpm","1");
+    display_helper(prg,map,"./textures/wall5.xpm","0CP");
+    display_helper(prg,map,"./animation/wall/wall10.xpm","1");
     display_helper(prg,map,"./textures/door.xpm","E");
     //display_helper(prg,map,"./textures/chicken.xpm","C");
     //display_helper(prg,map,"./animation/coin/coin0.xpm","C");
-    display_helper_with_frame(prg,map,"C",prg.coin.frames_arr[frame_offset]);
-    display_player(prg,map,"./textures/player.xpm",player);
-    
+    display_helper_with_frame(prg,map,"C",prg.coin.frames_arr[prg.coin.offset]);
+    display_helper_with_frame(prg,map,"P",prg.player_anim.frames_arr[prg.player_anim.offset]);
+    display_helper_with_frame(prg,map,"10PCE",prg.snow.frames_arr[prg.snow.offset]);
+    //display_helper_with_frame(prg,map,"1",prg.wall_animated.frames_arr[frame_offset]);
+    //display_player(prg,map,"./textures/player.xpm",player);
 }
