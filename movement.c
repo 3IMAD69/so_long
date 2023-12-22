@@ -18,7 +18,6 @@ void check_for_coins(t_program *prg,char next_place)
     {
         prg->player.coins_collected++; 
         playSoundAsync("sounds/collect_coin.mp3");
-        //img_ptr = mlx_xpm_file_to_image(prg->mlx, "./textures/wall3.xpm", &img_width, &img_height);
         //mlx_put_image_to_window(prg->mlx,prg->win,img_ptr,(prg->map.colums * 64) - 64,0);
         //mlx_put_image_to_window(prg->mlx,prg->win,img_ptr,prg->map.colums * 64,0); 
         //coins_char = ft_itoa(prg->player.coins_collected);
@@ -56,10 +55,11 @@ int handle_player_move_vertical(t_program *prg,int offset)
     check_for_coins(prg,next_place);
     if (check_for_ending(prg,next_place) == 1)
     {
-        //mlx_destroy_image(prg->mlx,prg->player.img_ptr);
-        //display_player(*prg,prg->map,"./textures/wall.xpm",&(prg->player));
+        if (offset == 1)
+             prg->player_anim.offset = 11; 
+        else
+             prg->player_anim.offset = 10;
         prg->player.y = prg->player.y + offset;
-        //display_player(*prg,prg->map,"./textures/player.xpm",&(prg->player));    
         prg->map.map_arr[prg->player.y][prg->player.x] = 'P'; 
         prg->map.map_arr[prg->player.y - offset][prg->player.x] = '0';
         handle_all_move(prg);
@@ -77,10 +77,19 @@ int handle_player_move_horizontal(t_program *prg,int offset)
     check_for_coins(prg,next_place);
     if (check_for_ending(prg,next_place) == 1)
     {
-       // mlx_destroy_image(prg->mlx,prg->player.img_ptr);
-        //display_player(*prg,prg->map,"./textures/wall.xpm",&(prg->player));
+        if (offset == 1)
+        {
+            prg->player_anim.offset = 8;
+            if (prg->player.left_or_right == 1)
+                init_player_right(prg);
+        }
+        else
+        {
+            prg->player_anim.offset = 9;
+            if (prg->player.left_or_right == 0)
+                init_player_left(prg);
+        }
         prg->player.x = prg->player.x + offset;
-       // display_player(*prg,prg->map,"./textures/player.xpm",&(prg->player));    
         prg->map.map_arr[prg->player.y][prg->player.x] = 'P'; 
         prg->map.map_arr[prg->player.y][prg->player.x - offset] = '0';
         handle_all_move(prg);

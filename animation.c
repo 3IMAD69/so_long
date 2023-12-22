@@ -23,25 +23,24 @@ int ft_animation(t_program *prg)
     static unsigned int player_frame;
 
     prg->frames++;
+    //mlx_destroy_image(prg->mlx,prg->player.img_ptr);
     mlx_clear_window(prg->mlx,prg->win);
-    if (prg->frames < 0)
+    if (prg->frames < 0 || prg->frames > 100)
         prg->frames = 0;
+    if (coin_frame > 100)
+    {
+        coin_frame = snow_frame = player_frame = 0;
+    }
     if (prg->frames % 5 == 0)
     {
-        printf ("Mera Kola 50 frames %d\n",prg->frames);
-
         display_map(*prg,prg->map,&(prg->player));
-        // coin_frame++;
-        // snow_frame++;
-        // player_frame++;
-        //(coin_frame == 5) && (coin_frame = 0);
-        //(snow_frame == 5) && (snow_frame = 0);
-        //(player_frame == 8) && (player_frame = 0);
         prg->coin.offset = coin_frame++ % 5;
         prg->snow.offset = snow_frame++ % 5;;
         prg->player_anim.offset = player_frame++ % 8;
-        printf("coin frame %d\n",coin_frame);
-    }
+        printf("Coin Frame %d\n",coin_frame);
+        printf("Snow Frame %d\n",snow_frame);
+        printf("player Frame %d\n",player_frame);
+    } 
     else
         display_map(*prg,prg->map,&(prg->player));
     handle_status_printed(prg);

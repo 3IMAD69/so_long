@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/22 13:02:35 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/22 17:42:33 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,15 +115,34 @@ void init_snow(t_program *prg)
     }
 }
 
-void init_player(t_program *prg)
+void init_player_right(t_program *prg)
 {
     int i = 0;
     char file_path[100];
 
+    prg->player.left_or_right = 0;
     prg->player_anim.offset = 0;
     while (i <= 7)
     {
-        ft_strlcpy(file_path,"./animation/player/idle/idle",sizeof(file_path));
+        ft_strlcpy(file_path,"./animation/player/idle_right/idle",sizeof(file_path));
+        ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
+        ft_strlcat(file_path,".xpm",sizeof(file_path));
+        printf("%s \n",file_path);
+        prg->player_anim.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->player_anim.img_widght),&(prg->player_anim.img_height));
+        i++;
+    }
+}
+
+void init_player_left(t_program *prg)
+{
+    int i = 0;
+    char file_path[100];
+
+    prg->player.left_or_right = 1;
+    prg->player_anim.offset = 0;
+    while (i <= 7)
+    {
+        ft_strlcpy(file_path,"./animation/player/idle_left/idle",sizeof(file_path));
         ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
         ft_strlcat(file_path,".xpm",sizeof(file_path));
         printf("%s \n",file_path);
@@ -151,7 +170,12 @@ int main(int argc,char *argv[])
     prg.frames = 0;
     init_coin(&prg);
     init_snow(&prg);
-    init_player(&prg);
+    init_player_right(&prg);
+    prg.player_anim.frames_arr[8] = mlx_xpm_file_to_image(prg.mlx,"./animation/player/run_right.xpm",&(prg.player_anim.img_widght),&(prg.player_anim.img_height));
+    prg.player_anim.frames_arr[9] = mlx_xpm_file_to_image(prg.mlx,"./animation/player/run_left.xpm",&(prg.player_anim.img_widght),&(prg.player_anim.img_height));
+    prg.player_anim.frames_arr[10] = mlx_xpm_file_to_image(prg.mlx,"./animation/player/run_up.xpm",&(prg.player_anim.img_widght),&(prg.player_anim.img_height));
+    prg.player_anim.frames_arr[11] = mlx_xpm_file_to_image(prg.mlx,"./animation/player/run_down.xpm",&(prg.player_anim.img_widght),&(prg.player_anim.img_height));
+    
     //display_map(prg,prg.map,&(prg.player),1);
 
     //mlx_string_put(prg.mlx,prg.win, 0, 0, 0xFFFFFFFF, "MOVES : 0");

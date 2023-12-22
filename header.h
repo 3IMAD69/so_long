@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:46 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/22 13:17:15 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/22 17:42:13 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_player
 	int coins_collected;
 	void 	*img_ptr;
 	int		moves;
+	int 	left_or_right;
 }			t_player;
 
 typedef struct s_map
@@ -100,6 +101,8 @@ void playSoundAsync(char *path);
 int 		ft_animation(t_program *prg);
 void handle_status_printed(t_program *prg);
 
+void init_player_left(t_program *prg);
+void init_player_right(t_program *prg);
 
 void printMap(char **map, int rows, int columns);
 
