@@ -22,7 +22,9 @@ int ft_animation(t_program *prg)
     static unsigned int player_frame;
     static struct timeval start_time;
     int frames_per_second = 0;
+    struct timeval end_time;
 
+    
     prg->frames++;
     if (prg->frames < 0 || prg->frames > 100)
         prg->frames = 0;
@@ -39,15 +41,14 @@ int ft_animation(t_program *prg)
     {
         mlx_clear_window(prg->mlx,prg->win);
         display_map(*prg,prg->map,&(prg->player));
+        //handle_status_printed(prg);
         prg->coin.offset = coin_frame++ % 5;
         prg->snow.offset = snow_frame++ % 5;;
         prg->player_anim.offset = player_frame++ % 8;
-    } 
-    
-
-        // Calculate FPS every 100 frames
+    }
+    // Calculate FPS every 100 frames
     if (prg->frames % 100 == 0) {
-        struct timeval end_time;
+
         gettimeofday(&end_time, NULL);
         double elapsed_time = (end_time.tv_sec - start_time.tv_sec) +
                               (end_time.tv_usec - start_time.tv_usec) / 1e6;
@@ -59,6 +60,7 @@ int ft_animation(t_program *prg)
         gettimeofday(&start_time, NULL);
     }
     handle_status_printed(prg);
+    //mlx_do_sync(prg->mlx);
     //usleep(25000);
     return (0);
 }

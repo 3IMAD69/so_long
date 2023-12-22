@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/22 19:15:40 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/22 21:52:17 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,9 @@ int main(int argc,char *argv[])
     prg.player_anim.frames_arr[10] = mlx_xpm_file_to_image(prg.mlx,"./animation/player/run_up.xpm",&(prg.player_anim.img_widght),&(prg.player_anim.img_height));
     prg.player_anim.frames_arr[11] = mlx_xpm_file_to_image(prg.mlx,"./animation/player/run_down.xpm",&(prg.player_anim.img_widght),&(prg.player_anim.img_height));
     
+    prg.wall_ptr = mlx_xpm_file_to_image(prg.mlx,"./textures/wall.xpm",&(prg.wall_animated.img_widght),&(prg.wall_animated.img_height));
+    prg.wall_darker_ptr = mlx_xpm_file_to_image(prg.mlx,"./textures/wall_darker.xpm",&(prg.wall_animated.img_widght),&(prg.wall_animated.img_height));
+    prg.door_ptr = mlx_xpm_file_to_image(prg.mlx,"./textures/door.xpm",&(prg.wall_animated.img_widght),&(prg.wall_animated.img_height));
     //display_map(prg,prg.map,&(prg.player),1);
 
     //mlx_string_put(prg.mlx,prg.win, 0, 0, 0xFFFFFFFF, "MOVES : 0");
