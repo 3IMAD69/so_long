@@ -53,23 +53,6 @@ void display_helper_with_frame(t_program prg,t_map map,char *characters,void *fr
     }
 }
 
-
-void display_player(t_program prg,t_map map,char *path,t_player *player)
-{
-    int i;
-    int j;
-    int img_width;
-    int img_height;
-    void *img_ptr;
-
-    i = 0;
-    img_width = 0;
-    img_height = 0;
-    img_ptr = mlx_xpm_file_to_image(prg.mlx, path, &img_width, &img_height);
-    player->img_ptr = img_ptr;
-    mlx_put_image_to_window(prg.mlx,prg.win,img_ptr,(player->x * 64),(player->y * 64));
-}
-
 void display_map(t_program prg,t_map map,t_player *player)
 {
     display_helper(prg,map,"./textures/wall5.xpm","0CP");
@@ -81,5 +64,4 @@ void display_map(t_program prg,t_map map,t_player *player)
     display_helper_with_frame(prg,map,"P",prg.player_anim.frames_arr[prg.player_anim.offset]);
     display_helper_with_frame(prg,map,"10PCE",prg.snow.frames_arr[prg.snow.offset]);
     //display_helper_with_frame(prg,map,"1",prg.wall_animated.frames_arr[frame_offset]);
-    //display_player(prg,map,"./textures/player.xpm",player);
 }

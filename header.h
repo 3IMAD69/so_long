@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:46 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/22 17:42:13 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/22 19:08:37 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void		check_if_all_coins_reachable(char **real_map, char **fake_map,
 				int rows);
 char		**create_copy_map(char **map, int rows, int colums);
 void 	display_map(t_program prg,t_map map,t_player *player);
-void 		display_player(t_program prg,t_map map,char *path,t_player *player);
 
 void handle_all_move(t_program *prg);
 void check_for_coins(t_program *prg,char next_place);
