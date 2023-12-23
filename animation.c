@@ -1,18 +1,5 @@
 #include "header.h"
 #include <sys/time.h> 
-// ft_coin_animation(t_animation *coin)
-// {
-//     static int frame;
-
-//     if (frame % 5 == 0)
-//     {
-//         coin->frames_arr[1];
-//     }
-//     else
-//         coin
-
-//     frame++;
-// }
 
 void handle_enemy(t_program *prg, unsigned int *enemy_frame)
 {

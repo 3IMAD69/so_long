@@ -45,29 +45,7 @@ int check_for_ending(t_program *prg,char next_place)
         return (1);
 }
 
-int handle_player_move_vertical(t_program *prg,int offset)
-{
-    char next_place;
-
-    next_place = prg->map.map_arr[prg->player.y + offset][prg->player.x];
-    if (next_place == '1')
-        return (0);
-    check_for_coins(prg,next_place);
-    if (check_for_ending(prg,next_place) == 1)
-    {
-        if (offset == 1)
-             prg->player_anim.offset = 11; 
-        else
-             prg->player_anim.offset = 10;
-        prg->player.y = prg->player.y + offset;
-        prg->map.map_arr[prg->player.y][prg->player.x] = 'P'; 
-        prg->map.map_arr[prg->player.y - offset][prg->player.x] = '0';
-        handle_all_move(prg);
-    }
-    return (1);
-}
-
-int handle_encounter_enemy(t_program *prg,char next_place,int offset,char my_place)
+int handle_encounter_enemy_v(t_program *prg,char next_place,int offset,char my_place)
 {
     if (next_place == 'X')
     {
@@ -79,29 +57,80 @@ int handle_encounter_enemy(t_program *prg,char next_place,int offset,char my_pla
         else
         {
             prg->map.map_arr[prg->player.y][prg->player.x] = 'H';
-            prg->map.map_arr[prg->player.y][prg->player.x - offset] = '0';
+            if (my_place == 'H')
+                prg->map.map_arr[prg->player.y - offset][prg->player.x] = 'X';
+            else
+                prg->map.map_arr[prg->player.y - offset][prg->player.x] = '0';
             return (1);
         }
     }
-    // if (my_place == 'H')
-    // {
-    //     printf("kharj mn nH\n");
-    //     prg->map.map_arr[prg->player.y][prg->player.x] = 'X';
-    //     prg->map.map_arr[prg->player.y][prg->player.x + offset] = 'P';
-    //     return (1);
-    // }
+    if (my_place == 'H')
+    {
+        printf("ANA KAHRJ MN H verically\n");
+        prg->map.map_arr[prg->player.y][prg->player.x] = 'P'; 
+        prg->map.map_arr[prg->player.y - offset][prg->player.x] = 'X';
+        return (1);
+    }
     return (0);
 }
 
-// void handle_h_case(t_program *prg,char next_place,int offset)
-// {
-//     if (prg->map.map_arr[prg->player.y][prg->player.x] == 'H')
-//     {
-//         printf("kharj mn nH\n");
-//         prg->map.map_arr[prg->player.y][prg->player.x] = 'X';
-//         prg->map.map_arr[prg->player.y][prg->player.x + offset] = 'P';
-//     }
-// }
+int handle_player_move_vertical(t_program *prg,int offset)
+{
+    char next_place;
+    char my_place;
+
+    next_place = prg->map.map_arr[prg->player.y + offset][prg->player.x];
+    my_place = prg->map.map_arr[prg->player.y][prg->player.x];
+    if (next_place == '1')
+        return (0);
+    check_for_coins(prg,next_place);
+    if (check_for_ending(prg,next_place) == 1)
+    {
+        if (offset == 1)
+             prg->player_anim.offset = 11; 
+        else
+             prg->player_anim.offset = 10;
+        prg->player.y = prg->player.y + offset;
+        if (handle_encounter_enemy_v(prg,next_place,offset,my_place) == 0)
+        {
+            prg->map.map_arr[prg->player.y][prg->player.x] = 'P'; 
+            prg->map.map_arr[prg->player.y - offset][prg->player.x] = '0';
+        }
+        handle_all_move(prg);
+    }
+    return (1);
+}
+
+int handle_encounter_enemy_h(t_program *prg,char next_place,int offset,char my_place)
+{
+    if (next_place == 'X')
+    {
+        if (prg->enemy[0].offset >= 5)
+        {
+            printf("you die %d\n",prg->enemy[0].offset);
+            exit(0);
+        }
+        else
+        {
+            if (my_place == 'H')
+                prg->map.map_arr[prg->player.y][prg->player.x - offset] = 'X';
+            else
+                prg->map.map_arr[prg->player.y][prg->player.x - offset] = '0';
+            prg->map.map_arr[prg->player.y][prg->player.x] = 'H';
+            return (1);
+        }
+    }
+    if (my_place == 'H')
+    {
+        printf("ANA KAHRJ MN H\n");
+        prg->map.map_arr[prg->player.y][prg->player.x] = 'P'; 
+        prg->map.map_arr[prg->player.y][prg->player.x - offset] = 'X';
+        return (1);
+    }
+    return (0);
+}
+
+
 
 int handle_player_move_horizontal(t_program *prg,int offset)
 {
@@ -129,19 +158,10 @@ int handle_player_move_horizontal(t_program *prg,int offset)
         }
         // handle_h_case(prg,next_place,offset);
         prg->player.x = prg->player.x + offset;
-        if (handle_encounter_enemy(prg,next_place,offset,my_place) == 0)
+        if (handle_encounter_enemy_h(prg,next_place,offset,my_place) == 0)
         {
-            if (my_place == 'H')
-            {
-                printf("ANA KAHRJ MN H\n");
-                prg->map.map_arr[prg->player.y][prg->player.x] = 'P'; 
-                prg->map.map_arr[prg->player.y][prg->player.x - offset] = 'X';
-            }
-            else
-            {
-                prg->map.map_arr[prg->player.y][prg->player.x] = 'P'; 
-                prg->map.map_arr[prg->player.y][prg->player.x - offset] = '0';
-            }
+            prg->map.map_arr[prg->player.y][prg->player.x] = 'P'; 
+            prg->map.map_arr[prg->player.y][prg->player.x - offset] = '0';
         }
         handle_all_move(prg);
     }
