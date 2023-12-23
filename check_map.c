@@ -67,7 +67,7 @@ void check_map_character(char **my_map,int rows,t_program *prg)
         j = 0;
         while (my_map[i][j] != '\0')
         {
-            if (!ft_strchr("01CEP",my_map[i][j]))
+            if (!ft_strchr("01CEPX",my_map[i][j]))
             {
                 free_my_map(my_map,rows);
                 print_error("Character Not Allowed !!");

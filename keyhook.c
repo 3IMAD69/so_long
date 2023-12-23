@@ -37,7 +37,7 @@ int	key_hook(int keycode,t_program *prg)
     if (keycode == 0 || keycode == 123)
         handle_player_move_horizontal(prg,-1);
 
-    //printMap(prg->map.map_arr,prg->map.rows,prg->map.colums);
+    printMap(prg->map.map_arr,prg->map.rows,prg->map.colums);
 	return (0);
 }
 
