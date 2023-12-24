@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:46 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/23 09:51:11 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/24 20:55:43 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_animation
 	int 	img_widght;
 	int 	img_height;
 	unsigned int		offset;
-	void 	**frames_arr[60];
+	void 	**frames_arr[200];
 }		t_animation;
 
 typedef struct s_player 
@@ -65,15 +65,16 @@ typedef struct s_program
 	void  	*wall_ptr;
 	void 	*wall_darker_ptr;
 	void 	*door_ptr;
-
-	
+	int 	*dolphins_direction;
+	int 	game_status;
 	t_animation coin;
 	t_animation wall_animated;
 	t_animation snow;
 	t_animation player_anim;
-	t_animation enemy[5];
+	t_animation enemy[2];
+	t_animation	dolphin_anim;
+	t_animation death_scene;
 }			t_program;
-
 
 typedef struct s_position
 {
@@ -108,7 +109,12 @@ void handle_status_printed(t_program *prg);
 
 void init_player_left(t_program *prg);
 void init_player_right(t_program *prg);
-
+void init_second_enemy(char **my_map,int rows);
+char  get_enemy_type(t_program prg, t_map map);
+void init_player_death(t_program *prg);
+void move_dolphin(t_program *prg);
+void init_dolphins_direction_arr(t_program *prg,char **my_map,int rows);
+int test_death_scene(t_program *prg);
 void printMap(char **map, int rows, int columns);
 
 #endif

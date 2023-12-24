@@ -47,28 +47,26 @@ int check_for_ending(t_program *prg,char next_place)
 
 int handle_encounter_enemy_v(t_program *prg,char next_place,int offset,char my_place)
 {
-    if (next_place == 'X')
+    if (next_place == 'X' || next_place == 'F' || next_place == 'Y')
     {
-        if (prg->enemy[0].offset >= 5)
+        if (next_place == 'Y')
         {
-            printf("you die %d\n",prg->enemy[0].offset);
-            exit(0);
+            printf("die dkhlt f dolphin");
+            prg->game_status = 0;
+            //exit(0);
         }
+        if (my_place == 'H')
+            prg->map.map_arr[prg->player.y - offset][prg->player.x] = get_enemy_type(*prg,prg->map);
         else
-        {
-            prg->map.map_arr[prg->player.y][prg->player.x] = 'H';
-            if (my_place == 'H')
-                prg->map.map_arr[prg->player.y - offset][prg->player.x] = 'X';
-            else
-                prg->map.map_arr[prg->player.y - offset][prg->player.x] = '0';
-            return (1);
-        }
+            prg->map.map_arr[prg->player.y - offset][prg->player.x] = '0';
+        prg->map.map_arr[prg->player.y][prg->player.x] = 'H';
+        return (1);
     }
     if (my_place == 'H')
     {
         printf("ANA KAHRJ MN H verically\n");
+        prg->map.map_arr[prg->player.y - offset][prg->player.x] = get_enemy_type(*prg,prg->map);
         prg->map.map_arr[prg->player.y][prg->player.x] = 'P'; 
-        prg->map.map_arr[prg->player.y - offset][prg->player.x] = 'X';
         return (1);
     }
     return (0);
@@ -103,28 +101,32 @@ int handle_player_move_vertical(t_program *prg,int offset)
 
 int handle_encounter_enemy_h(t_program *prg,char next_place,int offset,char my_place)
 {
-    if (next_place == 'X')
+    if (next_place == 'X' || next_place == 'F' || next_place == 'Y')
     {
-        if (prg->enemy[0].offset >= 5)
+        if (next_place == 'Y')
         {
+            printf("die dkhlt f dolphin");
+            prg->game_status = 0;
+            //exit(0);
+        }
+        if (prg->enemy[0].offset >= 15)
+        {
+            //init_player_death(prg);
             printf("you die %d\n",prg->enemy[0].offset);
-            exit(0);
+            //exit(0);
         }
+        if (my_place == 'H')
+            prg->map.map_arr[prg->player.y][prg->player.x - offset] = get_enemy_type(*prg,prg->map);
         else
-        {
-            if (my_place == 'H')
-                prg->map.map_arr[prg->player.y][prg->player.x - offset] = 'X';
-            else
-                prg->map.map_arr[prg->player.y][prg->player.x - offset] = '0';
-            prg->map.map_arr[prg->player.y][prg->player.x] = 'H';
+            prg->map.map_arr[prg->player.y][prg->player.x - offset] = '0';
+        prg->map.map_arr[prg->player.y][prg->player.x] = 'H';
             return (1);
-        }
     }
     if (my_place == 'H')
     {
-        printf("ANA KAHRJ MN H\n");
+        printf("ana kahrj mn trap\n");
+        prg->map.map_arr[prg->player.y][prg->player.x - offset] = get_enemy_type(*prg,prg->map);
         prg->map.map_arr[prg->player.y][prg->player.x] = 'P'; 
-        prg->map.map_arr[prg->player.y][prg->player.x - offset] = 'X';
         return (1);
     }
     return (0);

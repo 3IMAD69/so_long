@@ -14,7 +14,7 @@ void floodfill_recursive(char **map,int rows, int colums,int xrow,int ycolum)
 {
     // printf("Player pos x = %d %d / y = %d %d\n",xrow,rows,ycolum,colums);
     if (xrow < 0 || ycolum < 0 || xrow >= rows || ycolum >= colums 
-        || (map[xrow][ycolum] != '0' && map[xrow][ycolum] != 'E' && map[xrow][ycolum] != 'C' && map[xrow][ycolum] != 'P'))
+        || (map[xrow][ycolum] != '0' && map[xrow][ycolum] != 'E' && map[xrow][ycolum] != 'C' && map[xrow][ycolum] != 'P' && map[xrow][ycolum] != 'X' && map[xrow][ycolum] != 'Y'))
         return ;
     if (map[xrow][ycolum] == 'E' && (map[xrow][ycolum] = 'B'))
         return;

@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/23 10:10:12 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/24 22:24:31 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ void read_map(char *argv,t_program *prg,t_map *map)
     check_map_character(my_map,rows_allocated,prg);
     check_map_if_enclosed(my_map,rows_allocated,ft_strlen(my_map[0]));
     floodfill_checker(my_map,rows_allocated,ft_strlen(my_map[0]),get_entity_pos(my_map,rows_allocated,'P'));
+    init_second_enemy(my_map,rows_allocated);
+    init_dolphins_direction_arr(prg,my_map,rows_allocated);
+    //printMap(my_map,rows_allocated,ft_strlen(my_map[0]));
     prg->height = ft_strlen(my_map[0]) * 64;
     prg->width = rows_allocated * 64;
     map->map_arr = my_map;
@@ -130,6 +133,24 @@ void init_player_right(t_program *prg)
         i++;
     }
 }
+void init_player_death(t_program *prg)
+{
+    int i = 0;
+    char file_path[100];
+
+    prg->player.left_or_right = 0;
+    prg->player_anim.offset = 0;
+    while (i <= 7)
+    {
+        ft_strlcpy(file_path,"./animation/player/death/death",sizeof(file_path));
+        ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
+        ft_strlcat(file_path,".xpm",sizeof(file_path));
+        prg->player_anim.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->player_anim.img_widght),&(prg->player_anim.img_height));
+        i++;
+    }
+    
+}
+
 
 void init_player_left(t_program *prg)
 {
@@ -164,13 +185,52 @@ void init_enemy(t_program *prg)
     int i = 0;
     char file_path[100];
 
-    prg->enemy->offset = 0;
-    while (i <= 7)
+    prg->enemy[0].offset = 0;
+    prg->enemy[1].offset = 0;
+    while (i <= 17)
     {
         ft_strlcpy(file_path,"./animation/enemy/bear_trap/bear",sizeof(file_path));
         ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
         ft_strlcat(file_path,".xpm",sizeof(file_path));
         prg->enemy[0].frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->enemy[0].img_widght),&(prg->enemy[0].img_height));
+        ft_strlcpy(file_path,"./animation/enemy/fire_trap/fire",sizeof(file_path));
+        ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
+        ft_strlcat(file_path,".xpm",sizeof(file_path));
+        prg->enemy[1].frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->enemy[1].img_widght),&(prg->enemy[1].img_height));
+        i++;
+    }   
+}
+void init_death_scene(t_program *prg)
+{
+    int i = 0;
+    char file_path[100];
+
+    prg->death_scene.offset = 0;
+    //prg->death_scene.frames_arr[0] = mlx_xpm_file_to_image(prg->mlx,"./animation/death_scene/death_scene0.xpm",&(prg->death_scene.img_widght),&(prg->death_scene.img_height));
+    while (i <= 125)
+    {
+        ft_strlcpy(file_path,"./animation/death_scene/death_scene",sizeof(file_path));
+        ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
+        ft_strlcat(file_path,".xpm",sizeof(file_path));
+        printf("%s\n",file_path);
+        prg->death_scene.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->death_scene.img_widght),&(prg->death_scene.img_height));
+        //printf("%p\n",prg->death_scene.frames_arr[i]);
+        i++;
+    }
+}
+
+void init_dolphin(t_program *prg)
+{
+    int i = 0;
+    char file_path[100];
+
+    prg->dolphin_anim.offset = 0;
+    while (i <= 6)
+    {
+        ft_strlcpy(file_path,"./animation/enemy/dolphin/dolphin",sizeof(file_path));
+        ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
+        ft_strlcat(file_path,".xpm",sizeof(file_path));
+        prg->dolphin_anim.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->dolphin_anim.img_widght),&(prg->dolphin_anim.img_height));
         i++;
     }
 }
@@ -188,18 +248,22 @@ int main(int argc,char *argv[])
         print_error("Wrong Map Extention , '.ber' are the only extentions supported!!");
     read_map(argv[1],&prg,&(prg.map));
     prg.mlx = mlx_init();
-    prg.win = mlx_new_window(prg.mlx,prg.height,prg.width,"Window xXx");
+    prg.win = mlx_new_window(prg.mlx,prg.map.colums * 64,prg.map.rows * 64,"Window xXx");
     prg.player.moves = 0;
     prg.player.coins_collected = 0;
     prg.frames = 0;
+    prg.game_status = 1;
     init_coin(&prg);
     init_snow(&prg);
     init_player_right(&prg);
     init_move_player(&prg);
     init_enemy(&prg);
+    init_dolphin(&prg);
+    init_death_scene(&prg);
+
     mlx_key_hook(prg.win,key_hook,&prg);
     mlx_loop_hook(prg.mlx,ft_animation,&prg);
-    mlx_hook(prg.win, 17, 0, close_prg, &prg);
+    //mlx_hook(prg.win, 17, 0, close_prg, &prg);
     mlx_loop(prg.mlx);
     system("leaks so_long");
 }
