@@ -29,6 +29,14 @@ void handle_status_printed(t_program *prg)
     free(moves_char);
     free(moves_string);
     free(coins_string);
+    if (prg->player_attacking == 1 && prg->player_anim.offset == 7 && free_player(prg,7))
+    {
+        prg->player_attacking = 0;
+        if (prg->player.left_or_right == 0)
+            init_player_right(prg);
+        else
+            init_player_left(prg);
+    }
 }
 
 int	key_hook(int keycode,t_program *prg)

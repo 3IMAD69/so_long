@@ -5,7 +5,7 @@ SRC = main.c keyhook.c check_map.c check_map2.c check_map3.c display_map.c movem
 	includes/libft/ft_strlcat.c
 OBJ = $(SRC:.c=.o)
 
-FLAGS =  -Werror -g -fsanitize=address
+FLAGS =  -Werror #-g -fsanitize=address
 LINKS = -lmlx -framework OpenGL -framework AppKit
 
 NONE='\033[0m'

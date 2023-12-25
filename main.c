@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/25 18:27:12 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/25 21:37:53 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,23 +143,45 @@ void init_player_left(t_program *prg)
     }
 }
 
-void init_player_attack(t_program *prg)
+void init_player_attack_right(t_program *prg)
 {
     int i = 0;
     char file_path[100];
     char *number;
-    //prg->player.left_or_right = 1;
-    prg->player_anim.offset = 0;
+
+    printf("initing right attack\n");
     while (i <= 7)
     {
         number = ft_itoa(i);
-        ft_strlcpy(file_path,"./animation/player/attack/attack",sizeof(file_path));
+        ft_strlcpy(file_path,"./animation/player/attack_right/attack",sizeof(file_path));
         ft_strlcat(file_path,number,sizeof(file_path));
         ft_strlcat(file_path,".xpm",sizeof(file_path));
         prg->player_anim.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->player_anim.img_widght),&(prg->player_anim.img_height));
         free(number);
         i++;
     }
+    prg->player_attacking = 1;
+    prg->player_anim.offset = 0;
+}
+
+void init_player_attack_left(t_program *prg)
+{
+    int i = 0;
+    char file_path[100];
+    char *number;
+    printf("initing left attack\n");
+    while (i <= 7)
+    {
+        number = ft_itoa(i);
+        ft_strlcpy(file_path,"./animation/player/attack_left/attack",sizeof(file_path));
+        ft_strlcat(file_path,number,sizeof(file_path));
+        ft_strlcat(file_path,".xpm",sizeof(file_path));
+        prg->player_anim.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->player_anim.img_widght),&(prg->player_anim.img_height));
+        free(number);
+        i++;
+    }
+    prg->player_attacking = 1;
+    prg->player_anim.offset = 0;
 }
 
 
@@ -254,6 +276,7 @@ int main(int argc,char *argv[])
     prg.player.coins_collected = 0;
     prg.frames = 0;
     prg.game_status = 1;
+    prg.player_attacking = 0;
     init_coin(&prg);
     init_snow(&prg);
     init_player_right(&prg);

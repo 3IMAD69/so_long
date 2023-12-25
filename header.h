@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:46 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/25 18:27:55 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/25 21:34:15 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_map
 	char	**map_arr;
 }			t_map;
 
+
 typedef struct s_program
 {
 	void	*mlx;
@@ -74,6 +75,7 @@ typedef struct s_program
 	t_animation enemy[2];
 	t_animation	dolphin_anim;
 	t_animation death_scene;
+	int 	player_attacking;
 }			t_program;
 
 typedef struct s_frames
@@ -128,5 +130,6 @@ void free_my_game(t_program *prg);
 int free_player(t_program *prg,int limit);
 
 void handle_attack(int keycode ,t_program *prg);
-void init_player_attack(t_program *prg);
+void init_player_attack_right(t_program *prg);
+void init_player_attack_left(t_program *prg);
 #endif
