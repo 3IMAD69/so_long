@@ -31,9 +31,8 @@ int check_for_ending(t_program *prg,char next_place)
     if (next_place == 'E' && prg->player.coins_collected == prg->map.coin)
     {
         playSoundAsync("sounds/door-slam.mp3");
-        printf("You won!");
-       //free_my_map(prg->map.map_arr,prg->map.rows);
-        //system("leaks so_long");
+        free_my_game(prg);
+        system("leaks so_long");
         exit(0);
     }
     else if (next_place == 'E' && prg->player.coins_collected != prg->map.coin)
@@ -53,7 +52,6 @@ int handle_encounter_enemy_v(t_program *prg,char next_place,int offset,char my_p
         {
             printf("die dkhlt f dolphin");
             prg->game_status = 0;
-            //exit(0);
         }
         if (my_place == 'H')
             prg->map.map_arr[prg->player.y - offset][prg->player.x] = get_enemy_type(*prg,prg->map);
@@ -111,8 +109,8 @@ int handle_encounter_enemy_h(t_program *prg,char next_place,int offset,char my_p
         }
         if (prg->enemy[0].offset >= 15)
         {
-            //init_player_death(prg);
             printf("you die %d\n",prg->enemy[0].offset);
+            prg->game_status = 0;
             //exit(0);
         }
         if (my_place == 'H')
@@ -149,13 +147,13 @@ int handle_player_move_horizontal(t_program *prg,int offset)
         if (offset == 1)
         {
             prg->player_anim.offset = 8;
-            if (prg->player.left_or_right == 1)
+            if (prg->player.left_or_right == 1 && free_player(prg,7))
                 init_player_right(prg);
         }
         else
         {
             prg->player_anim.offset = 9;
-            if (prg->player.left_or_right == 0)
+            if (prg->player.left_or_right == 0 && free_player(prg,7))
                 init_player_left(prg);
         }
         // handle_h_case(prg,next_place,offset);

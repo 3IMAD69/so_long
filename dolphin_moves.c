@@ -6,37 +6,33 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:57:13 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/24 21:03:24 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/25 08:59:13 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	move_dolphin_helper2(t_map *map, int offset, int i, int *j)
+void	move_dolphin_helper2(t_program *prg, int offset, int i, int *j)
 {
 	char	tmp;
 
-	tmp = map->map_arr[i][*j + offset];
-	map->map_arr[i][*j + offset] = 'Y';
-	map->map_arr[i][*j] = '0';
+	tmp = prg->map.map_arr[i][*j + offset];
+	prg->map.map_arr[i][*j + offset] = 'Y';
+	prg->map.map_arr[i][*j] = '0';
 	*j = *j + offset;
 	if (tmp == 'P')
-	{
-		playSoundAsync("sounds/dolphin_laugh.mp3");
-		printf("daz elih dolhpin\n");
-		exit(0);
-	}
+		prg->game_status = 0;
 }
 
 void	move_dolphin_helper(t_program *prg, int dolphin_number, int i, int *j)
 {
 	if (prg->dolphins_direction[dolphin_number] == 0 && (prg->map.map_arr[i][*j
 			+ 1] == '0' || prg->map.map_arr[i][*j + 1] == 'P'))
-		move_dolphin_helper2(&(prg->map), 1, i, j);
+		move_dolphin_helper2(prg, 1, i, j);
 	else if (prg->dolphins_direction[dolphin_number] == 1
 		&& (prg->map.map_arr[i][*j - 1] == '0' || prg->map.map_arr[i][*j
 		- 1] == 'P'))
-		move_dolphin_helper2(&(prg->map), -1, i, j);
+		move_dolphin_helper2(prg, -1, i, j);
 }
 
 void	set_dolphins_next_direction(t_program *prg, int dolphin_number, int i,

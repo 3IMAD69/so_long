@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:46 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/24 20:55:43 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/25 18:27:55 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_animation
 	int 	img_widght;
 	int 	img_height;
 	unsigned int		offset;
-	void 	**frames_arr[200];
+	void 	*frames_arr[200];
 }		t_animation;
 
 typedef struct s_player 
@@ -76,6 +76,16 @@ typedef struct s_program
 	t_animation death_scene;
 }			t_program;
 
+typedef struct s_frames
+{
+	unsigned int coin_frame;
+    unsigned int snow_frame;
+    unsigned int player_frame;
+    unsigned int enemy_frame;
+    unsigned int dolphin_frame;
+    int death_frame;	
+}				t_frames;
+
 typedef struct s_position
 {
 	int		x_row;
@@ -84,7 +94,7 @@ typedef struct s_position
 
 
 int			key_hook(int keycode,t_program *prg);
-int			close_prg(t_program *);
+int			close_x(int keycode, t_program *prg);
 void		validate_map(char **my_map, int rows);
 void		check_map_character(char **my_map, int rows,t_program *prg);
 void		free_my_map(char **my_map, int rows);
@@ -111,10 +121,12 @@ void init_player_left(t_program *prg);
 void init_player_right(t_program *prg);
 void init_second_enemy(char **my_map,int rows);
 char  get_enemy_type(t_program prg, t_map map);
-void init_player_death(t_program *prg);
 void move_dolphin(t_program *prg);
 void init_dolphins_direction_arr(t_program *prg,char **my_map,int rows);
-int test_death_scene(t_program *prg);
 void printMap(char **map, int rows, int columns);
+void free_my_game(t_program *prg);
+int free_player(t_program *prg,int limit);
 
+void handle_attack(int keycode ,t_program *prg);
+void init_player_attack(t_program *prg);
 #endif

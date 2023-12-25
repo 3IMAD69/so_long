@@ -14,37 +14,43 @@ void playSoundAsync(char *path) {
 void handle_status_printed(t_program *prg)
 {
     char *coins_char;
+    char *coins_string;
     char *moves_char;
-
+    char *moves_string;
+    
     moves_char = ft_itoa(prg->player.moves);
-    mlx_string_put(prg->mlx,prg->win, 0, 0, 0xFFFFFFFF, ft_strjoin("MOVES : ",moves_char));
+    moves_string = ft_strjoin("MOVES : ",moves_char);
+    mlx_string_put(prg->mlx,prg->win, 0, 0, 0xFFFFFFFF, moves_string);
+    
     coins_char = ft_itoa(prg->player.coins_collected);
-    mlx_string_put(prg->mlx,prg->win, (prg->map.colums - 1.5) * 64, 0, 0xFFFFFFFF, ft_strjoin("COINS : ",ft_itoa(prg->player.coins_collected)));
+    coins_string = ft_strjoin("COINS : ",coins_char);
+    mlx_string_put(prg->mlx,prg->win, (prg->map.colums - 1.5) * 64, 0, 0xFFFFFFFF, coins_string);
     free(coins_char);
     free(moves_char);
+    free(moves_string);
+    free(coins_string);
 }
 
 int	key_hook(int keycode,t_program *prg)
 {
-    printf("%d\n",prg->frames);
-    if (keycode == 53 ) //ESC
-        exit(0);
-    if (keycode == 13 || keycode == 126)
+    if (keycode == 53) //ESC
+        free_my_game(prg);
+    if (keycode == 13)
         handle_player_move_vertical(prg,-1);
-    if (keycode == 1 || keycode == 125)
+    if (keycode == 1)
         handle_player_move_vertical(prg,1);
-    if (keycode == 2 || keycode == 124)
+    if (keycode == 2)
         handle_player_move_horizontal(prg,1);
-    if (keycode == 0 || keycode == 123)
+    if (keycode == 0)
         handle_player_move_horizontal(prg,-1);
-
+    handle_attack(keycode,prg);
     //printMap(prg->map.map_arr,prg->map.rows,prg->map.colums);
 	return (0);
 }
 
-int	close_prg(t_program *prg)
+int	close_x(int keycode, t_program *prg)
 {
-    free_my_map(prg->map.map_arr,prg->map.rows);
-    printf("closing the program\n");
-	exit(0);
+	//mlx_destroy_window(vars->mlx, vars->win);
+    printf("%d => cloosing",prg->frames);
+	return (0);
 }

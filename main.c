@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/24 22:24:31 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/25 18:27:12 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,36 +83,23 @@ void init_coin(t_program *prg)
     prg->coin.frames_arr[2] = mlx_xpm_file_to_image(prg->mlx,"./animation/coin/coin2.xpm",&(prg->coin.img_widght),&(prg->coin.img_height));
     prg->coin.frames_arr[3] = mlx_xpm_file_to_image(prg->mlx,"./animation/coin/coin3.xpm",&(prg->coin.img_widght),&(prg->coin.img_height));
     prg->coin.frames_arr[4] = mlx_xpm_file_to_image(prg->mlx,"./animation/coin/coin4.xpm",&(prg->coin.img_widght),&(prg->coin.img_height));
-    prg->coin.frames_arr[5] = mlx_xpm_file_to_image(prg->mlx,"./animation/coin/coin5.xpm",&(prg->coin.img_widght),&(prg->coin.img_height));
 }
-
-// void init_wall(t_program *prg)
-// {
-//     int i = 0;
-//     char file_path[100];
-
-//     while (i <= 41)
-//     {
-//         ft_strlcpy(file_path,"./animation/wall/wall",sizeof(file_path));
-//         ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
-//         ft_strlcat(file_path,".xpm",sizeof(file_path));
-//         prg->wall_animated.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->wall_animated.img_widght),&(prg->wall_animated.img_height));
-//         i++;
-//     }
-// }
 
 void init_snow(t_program *prg)
 {
     int i = 0;
     char file_path[100];
-
+    char *number;
+    
     prg->snow.offset = 0;
     while (i <= 4)
     {
+        number = ft_itoa(i);
         ft_strlcpy(file_path,"./animation/snow/snow",sizeof(file_path));
-        ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
+        ft_strlcat(file_path,number,sizeof(file_path));
         ft_strlcat(file_path,".xpm",sizeof(file_path));
         prg->snow.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->snow.img_widght),&(prg->snow.img_height));
+        free(number);
         i++;
     }
 }
@@ -121,50 +108,56 @@ void init_player_right(t_program *prg)
 {
     int i = 0;
     char file_path[100];
+    char *number;
 
     prg->player.left_or_right = 0;
     prg->player_anim.offset = 0;
     while (i <= 7)
     {
+        number = ft_itoa(i);
         ft_strlcpy(file_path,"./animation/player/idle_right/idle",sizeof(file_path));
-        ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
+        ft_strlcat(file_path,number,sizeof(file_path));
         ft_strlcat(file_path,".xpm",sizeof(file_path));
         prg->player_anim.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->player_anim.img_widght),&(prg->player_anim.img_height));
+        free(number);
         i++;
     }
 }
-void init_player_death(t_program *prg)
-{
-    int i = 0;
-    char file_path[100];
-
-    prg->player.left_or_right = 0;
-    prg->player_anim.offset = 0;
-    while (i <= 7)
-    {
-        ft_strlcpy(file_path,"./animation/player/death/death",sizeof(file_path));
-        ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
-        ft_strlcat(file_path,".xpm",sizeof(file_path));
-        prg->player_anim.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->player_anim.img_widght),&(prg->player_anim.img_height));
-        i++;
-    }
-    
-}
-
 
 void init_player_left(t_program *prg)
 {
     int i = 0;
     char file_path[100];
-
+    char *number;
     prg->player.left_or_right = 1;
     prg->player_anim.offset = 0;
     while (i <= 7)
     {
+        number = ft_itoa(i);
         ft_strlcpy(file_path,"./animation/player/idle_left/idle",sizeof(file_path));
-        ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
+        ft_strlcat(file_path,number,sizeof(file_path));
         ft_strlcat(file_path,".xpm",sizeof(file_path));
         prg->player_anim.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->player_anim.img_widght),&(prg->player_anim.img_height));
+        free(number);
+        i++;
+    }
+}
+
+void init_player_attack(t_program *prg)
+{
+    int i = 0;
+    char file_path[100];
+    char *number;
+    //prg->player.left_or_right = 1;
+    prg->player_anim.offset = 0;
+    while (i <= 7)
+    {
+        number = ft_itoa(i);
+        ft_strlcpy(file_path,"./animation/player/attack/attack",sizeof(file_path));
+        ft_strlcat(file_path,number,sizeof(file_path));
+        ft_strlcat(file_path,".xpm",sizeof(file_path));
+        prg->player_anim.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->player_anim.img_widght),&(prg->player_anim.img_height));
+        free(number);
         i++;
     }
 }
@@ -184,37 +177,41 @@ void init_enemy(t_program *prg)
 {
     int i = 0;
     char file_path[100];
+    char *number;
 
     prg->enemy[0].offset = 0;
     prg->enemy[1].offset = 0;
     while (i <= 17)
     {
+        number = ft_itoa(i);
         ft_strlcpy(file_path,"./animation/enemy/bear_trap/bear",sizeof(file_path));
-        ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
+        ft_strlcat(file_path,number,sizeof(file_path));
         ft_strlcat(file_path,".xpm",sizeof(file_path));
         prg->enemy[0].frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->enemy[0].img_widght),&(prg->enemy[0].img_height));
         ft_strlcpy(file_path,"./animation/enemy/fire_trap/fire",sizeof(file_path));
-        ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
+        ft_strlcat(file_path,number,sizeof(file_path));
         ft_strlcat(file_path,".xpm",sizeof(file_path));
         prg->enemy[1].frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->enemy[1].img_widght),&(prg->enemy[1].img_height));
+        free (number);
         i++;
-    }   
+    }  
 }
 void init_death_scene(t_program *prg)
 {
     int i = 0;
     char file_path[100];
-
+    char *number;
+    
     prg->death_scene.offset = 0;
     //prg->death_scene.frames_arr[0] = mlx_xpm_file_to_image(prg->mlx,"./animation/death_scene/death_scene0.xpm",&(prg->death_scene.img_widght),&(prg->death_scene.img_height));
     while (i <= 125)
     {
+        number = ft_itoa(i);
         ft_strlcpy(file_path,"./animation/death_scene/death_scene",sizeof(file_path));
-        ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
+        ft_strlcat(file_path,number,sizeof(file_path));
         ft_strlcat(file_path,".xpm",sizeof(file_path));
-        printf("%s\n",file_path);
         prg->death_scene.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->death_scene.img_widght),&(prg->death_scene.img_height));
-        //printf("%p\n",prg->death_scene.frames_arr[i]);
+        free(number);
         i++;
     }
 }
@@ -223,17 +220,21 @@ void init_dolphin(t_program *prg)
 {
     int i = 0;
     char file_path[100];
-
+    char *number;
+    
     prg->dolphin_anim.offset = 0;
     while (i <= 6)
     {
+        number = ft_itoa(i);
         ft_strlcpy(file_path,"./animation/enemy/dolphin/dolphin",sizeof(file_path));
-        ft_strlcat(file_path,ft_itoa(i),sizeof(file_path));
+        ft_strlcat(file_path,number,sizeof(file_path));
         ft_strlcat(file_path,".xpm",sizeof(file_path));
         prg->dolphin_anim.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->dolphin_anim.img_widght),&(prg->dolphin_anim.img_height));
+        free (number);
         i++;
     }
 }
+
 
 int main(int argc,char *argv[])
 {
@@ -263,7 +264,7 @@ int main(int argc,char *argv[])
 
     mlx_key_hook(prg.win,key_hook,&prg);
     mlx_loop_hook(prg.mlx,ft_animation,&prg);
-    //mlx_hook(prg.win, 17, 0, close_prg, &prg);
+    mlx_hook(prg.win, 17, 0, close_x, &prg);
     mlx_loop(prg.mlx);
     system("leaks so_long");
 }
