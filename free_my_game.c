@@ -72,6 +72,18 @@ void free_enemy(t_program *prg)
         i++;
     }
 }
+void free_door(t_program *prg)
+{
+    int i;
+
+    i = 0;
+    while (i <= 58)
+    {
+        mlx_destroy_image(prg->mlx,prg->door_animation.frames_arr[i]);
+        i++;
+    }
+}
+
 
 
 
@@ -90,7 +102,6 @@ void free_my_game(t_program *prg)
     free_dolphin(prg);
     mlx_destroy_image(prg->mlx,prg->wall_ptr);
     mlx_destroy_image(prg->mlx,prg->wall_darker_ptr);
-    mlx_destroy_image(prg->mlx,prg->door_ptr);
      //free_death_scene(prg);
      mlx_destroy_window(prg->mlx,prg->win);
     //free(prg->mlx);

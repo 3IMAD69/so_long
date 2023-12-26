@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/25 21:37:53 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/26 12:15:36 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,6 @@ void init_move_player(t_program *prg)
 {
     prg->wall_ptr = mlx_xpm_file_to_image(prg->mlx,"./textures/wall.xpm",&(prg->wall_animated.img_widght),&(prg->wall_animated.img_height));
     prg->wall_darker_ptr = mlx_xpm_file_to_image(prg->mlx,"./textures/wall_darker.xpm",&(prg->wall_animated.img_widght),&(prg->wall_animated.img_height));
-    prg->door_ptr = mlx_xpm_file_to_image(prg->mlx,"./textures/door.xpm",&(prg->wall_animated.img_widght),&(prg->wall_animated.img_height));
     prg->player_anim.frames_arr[8] = mlx_xpm_file_to_image(prg->mlx,"./animation/player/run_right.xpm",&(prg->player_anim.img_widght),&(prg->player_anim.img_height));
     prg->player_anim.frames_arr[9] = mlx_xpm_file_to_image(prg->mlx,"./animation/player/run_left.xpm",&(prg->player_anim.img_widght),&(prg->player_anim.img_height));
     prg->player_anim.frames_arr[10] = mlx_xpm_file_to_image(prg->mlx,"./animation/player/run_up.xpm",&(prg->player_anim.img_widght),&(prg->player_anim.img_height));
@@ -257,6 +256,25 @@ void init_dolphin(t_program *prg)
     }
 }
 
+void init_door(t_program *prg)
+{
+    int i = 0;
+    char file_path[100];
+    char *number;
+    
+    prg->door_animation.offset = 0;
+    while (i <= 58)
+    {
+        number = ft_itoa(i);
+        ft_strlcpy(file_path,"./animation/door/door",sizeof(file_path));
+        ft_strlcat(file_path,number,sizeof(file_path));
+        ft_strlcat(file_path,".xpm",sizeof(file_path));
+        prg->door_animation.frames_arr[i] = mlx_xpm_file_to_image(prg->mlx,file_path,&(prg->door_animation.img_widght),&(prg->door_animation.img_height));
+        free (number);
+        i++;
+    }
+}
+
 
 int main(int argc,char *argv[])
 {
@@ -284,7 +302,7 @@ int main(int argc,char *argv[])
     init_enemy(&prg);
     init_dolphin(&prg);
     init_death_scene(&prg);
-
+    init_door(&prg);
     mlx_key_hook(prg.win,key_hook,&prg);
     mlx_loop_hook(prg.mlx,ft_animation,&prg);
     mlx_hook(prg.win, 17, 0, close_x, &prg);

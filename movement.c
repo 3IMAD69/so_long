@@ -30,14 +30,14 @@ int check_for_ending(t_program *prg,char next_place)
 {
     if (next_place == 'E' && prg->player.coins_collected == prg->map.coin)
     {
-        playSoundAsync("sounds/door-slam.mp3");
+        playSoundAsync("sounds/portal_closed.mp3");
         free_my_game(prg);
         system("leaks so_long");
         exit(0);
     }
     else if (next_place == 'E' && prg->player.coins_collected != prg->map.coin)
     {
-        playSoundAsync("sounds/door-locked.mp3");
+        playSoundAsync("sounds/portal_looked.mp3");
         return (0);
     }
     else 

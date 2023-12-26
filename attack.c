@@ -14,6 +14,7 @@ void attack_vertical(t_program *prg,int offset)
             init_player_attack_right(prg);
         else
             init_player_attack_left(prg);
+        playSoundAsync("./sounds/katana_sound.mp3");
         prg->map.map_arr[prg->player.y + offset][prg->player.x] = '0';
     }
 }
@@ -31,6 +32,7 @@ void attack_horizontal(t_program *prg,int offset)
             init_player_attack_right(prg);
         else
             init_player_attack_left(prg);
+        playSoundAsync("./sounds/katana_sound.mp3");
         prg->map.map_arr[prg->player.y][prg->player.x + offset] = '0';
     }
 }

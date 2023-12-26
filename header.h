@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:46 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/25 21:34:15 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/26 11:25:29 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_program
 	int 	frames;
 	void  	*wall_ptr;
 	void 	*wall_darker_ptr;
-	void 	*door_ptr;
 	int 	*dolphins_direction;
 	int 	game_status;
 	t_animation coin;
@@ -75,6 +74,7 @@ typedef struct s_program
 	t_animation enemy[2];
 	t_animation	dolphin_anim;
 	t_animation death_scene;
+	t_animation door_animation;
 	int 	player_attacking;
 }			t_program;
 
@@ -84,6 +84,7 @@ typedef struct s_frames
     unsigned int snow_frame;
     unsigned int player_frame;
     unsigned int enemy_frame;
+	unsigned int door_frame;
     unsigned int dolphin_frame;
     int death_frame;	
 }				t_frames;

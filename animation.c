@@ -1,12 +1,13 @@
 #include "header.h"
 #include <sys/time.h> 
 
-void handle_enemy(t_program *prg, unsigned int *enemy_frame)
+void handle_enemy(t_program *prg, t_frames *frm)
 {
+    prg->door_animation.offset = frm->door_frame++ % 58;
     if (prg->frames % 18 == 0)
     {
-        prg->enemy[0].offset = (*enemy_frame)++ % 18;
-        prg->enemy[1].offset = (*enemy_frame)++ % 18;
+        prg->enemy[0].offset = (frm->enemy_frame)++ % 18;
+        prg->enemy[1].offset = (frm->enemy_frame)++ % 18;
         if (prg->enemy[0].offset >= 15 && prg->map.map_arr[prg->player.y][prg->player.x] == 'H')
         {
             printf("player Offset %d",prg->player_anim.offset);
@@ -39,7 +40,7 @@ int ft_animation(t_program *prg)
     if ((prg->frames++) == 0)
         ft_memset(&frm,0,sizeof(frm));
     if (frm.coin_frame >= 100)
-        ft_memset(&frm,0,4*4);
+        ft_memset(&frm,0,4*5);
     if (prg->game_status == 1)
     {
         if (prg->frames % 5 == 0)
@@ -51,8 +52,8 @@ int ft_animation(t_program *prg)
             prg->player_anim.offset = frm.player_frame++ % 8;
             prg->dolphin_anim.offset = frm.dolphin_frame++ % 7;
         }
-        handle_enemy(prg,&(frm.enemy_frame));
-        if (prg->frames % 50 == 0)
+        handle_enemy(prg,&frm);
+        if (prg->frames % 100 == 0)
             move_dolphin(prg);
         handle_status_printed(prg);
     }
