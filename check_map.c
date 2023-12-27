@@ -6,13 +6,13 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 14:20:50 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/26 14:33:31 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/27 21:41:54 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	free_my_map(char **my_map, int rows)
+void	free_my_map(char **my_map, int rows, int fd)
 {
 	int	i;
 
@@ -23,9 +23,11 @@ void	free_my_map(char **my_map, int rows)
 		i++;
 	}
 	free(my_map);
+	if (fd != -2)
+		close(fd);
 }
 
-void	validate_map(char **my_map, int rows)
+void	validate_map(char **my_map, int rows, int fd)
 {
 	int	col_size;
 	int	i;
@@ -35,7 +37,7 @@ void	validate_map(char **my_map, int rows)
 		print_error("Invalid_map");
 	if (my_map[0] == NULL || my_map[0] == '\0')
 	{
-		free_my_map(my_map, rows);
+		free_my_map(my_map, rows, fd);
 		print_error("Invalid Map!!");
 	}
 	col_size = ft_strlen(my_map[0]);
@@ -43,18 +45,18 @@ void	validate_map(char **my_map, int rows)
 	{
 		if (ft_strlen(my_map[i]) != col_size)
 		{
-			free_my_map(my_map, rows);
+			free_my_map(my_map, rows, fd);
 			print_error("Invalid Row In Map!!");
 		}
 		i++;
 	}
 }
 
-void	checker_character_helper(char **my_map, t_map *map, int rows)
+void	checker_character_helper(char **my_map, t_map *map, int rows, int fd)
 {
 	if (map->coin == 0 || map->exit != 1 || map->player_pos != 1)
 	{
-		free_my_map(my_map, rows);
+		free_my_map(my_map, rows, fd);
 		if (map->coin == 0)
 			print_error("No Coin Found!!");
 		print_error("Map is Invalid !!");
@@ -82,7 +84,7 @@ void	check_map_character(char **my_map, int rows, t_program *prg)
 		{
 			if (!ft_strchr("01CEPXY", my_map[i][j]))
 			{
-				free_my_map(my_map, rows);
+				free_my_map(my_map, rows, prg->fd);
 				print_error("Character Not Allowed !!");
 			}
 			prg->map.exit += (my_map[i][j] == 'E');
@@ -93,5 +95,5 @@ void	check_map_character(char **my_map, int rows, t_program *prg)
 		}
 		i++;
 	}
-	checker_character_helper(my_map, &(prg->map), rows);
+	checker_character_helper(my_map, &(prg->map), rows, prg->fd);
 }

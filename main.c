@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/27 10:01:23 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/27 21:44:36 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,21 @@ void	read_map(char *argv, t_program *prg, t_map *map)
 	char	*buffer;
 	char	**my_map;
 	int		i;
-	int		fd;
 
 	i = 0;
 	my_map = NULL;
-	fd = open(argv, O_RDONLY);
-	if (fd == -1)
+	prg->fd = open(argv, O_RDONLY);
+	if (prg->fd == -1)
 		print_error("Map Not Found!");
-	buffer = get_next_line(fd);
+	buffer = get_next_line(prg->fd);
 	while (buffer)
 	{
 		read_map_helper(&my_map, buffer, i);
 		i++;
-		buffer = get_next_line(fd);
+		buffer = get_next_line(prg->fd);
 	}
 	validate_and_init(my_map, i, prg, map);
-	close(fd);
+	close(prg->fd);
 }
 
 void	init_entity(t_program *prg, t_animation *animation, char *folderr,
@@ -99,8 +98,7 @@ int	main(int argc, char *argv[])
 		print_error("Wrong Map Extention!");
 	read_map(argv[1], &prg, &(prg.map));
 	prg.mlx = mlx_init();
-	prg.win = mlx_new_window(prg.mlx, prg.map.colums * 64, prg.map.rows * 64,
-			"Window xXx");
+	prg.win = mlx_new_window(prg.mlx, prg.height, prg.width, "Window xXx");
 	prg.player.moves = 0;
 	prg.player.coins_collected = 0;
 	prg.frames = 0;

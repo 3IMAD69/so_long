@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 15:03:38 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/26 17:37:26 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/27 21:44:28 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	free_my_game(t_program *prg)
 
 	i = 0;
 	free(prg->dolphins_direction);
-	free_my_map(prg->map.map_arr, prg->map.rows);
+	free_my_map(prg->map.map_arr, prg->map.rows, prg->fd);
 	free_frames(prg, &(prg->coin), 4);
 	free_frames(prg, &(prg->snow), 4);
 	free_frames(prg, &(prg->player_anim), 11);

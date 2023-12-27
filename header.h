@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:46 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/27 09:53:18 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/27 21:44:31 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_program
 	void			*win;
 	int				height;
 	int				width;
+	int				fd;
 	t_map			map;
 	t_player		player;
 	int				frames;
@@ -94,17 +95,18 @@ typedef struct s_position
 
 int					key_hook(int keycode, t_program *prg);
 int					close_x(int keycode, t_program *prg);
-void				validate_map(char **my_map, int rows);
+void				validate_map(char **my_map, int rows, int fd);
 void				check_map_character(char **my_map, int rows,
 						t_program *prg);
-void				free_my_map(char **my_map, int rows);
+void				free_my_map(char **my_map, int rows, int fd);
 int					print_error(char *str);
 t_position			get_entity_pos(char **map, int rows, char c);
-void				floodfill_checker(char **map, int rows, int colums,
+void				floodfill_checker(t_program *prg, int rows, int colums,
 						t_position entity);
-void				check_map_if_enclosed(char **my_map, int rows, int colums);
+void				check_map_if_enclosed(char **my_map, int rows, int colums,
+						int fd);
 void				check_if_all_coins_reachable(char **real_map,
-						char **fake_map, int rows);
+						char **fake_map, int rows, int fd);
 char				**create_copy_map(char **map, int rows, int colums);
 void				display_map(t_program prg, t_map map, t_player *player);
 

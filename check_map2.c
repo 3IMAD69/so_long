@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 14:36:35 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/27 19:11:55 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/27 21:44:18 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,25 @@ void	floodfill_recursive(char **map, int rows, int colums, int xrow,
 	floodfill_recursive(map, rows, colums, xrow, ycolum + 1);
 }
 
-void	floodfill_checker(char **map, int rows, int colums, t_position entity)
+void	floodfill_checker(t_program *prg, int rows, int colums,
+		t_position entity)
 {
 	t_position	exit_pos;
 	char		**copy_map;
 
-	copy_map = create_copy_map(map, rows, colums);
-	exit_pos = get_entity_pos(map, rows, 'E');
+	copy_map = create_copy_map(prg->map.map_arr, rows, colums);
+	exit_pos = get_entity_pos(prg->map.map_arr, rows, 'E');
 	floodfill_recursive(copy_map, rows, colums, entity.x_row, entity.y_colum);
 	if (copy_map[exit_pos.x_row][exit_pos.y_colum] == 'B')
 	{
-		check_if_all_coins_reachable(map, copy_map, rows);
-		free_my_map(copy_map, rows);
+		check_if_all_coins_reachable(prg->map.map_arr, copy_map, rows, prg->fd);
+		free_my_map(copy_map, rows, -2);
 	}
 	else
 	{
 		printf("Bad Map !\n");
-		free_my_map(map, rows);
-		free_my_map(copy_map, rows);
+		free_my_map(prg->map.map_arr, rows, prg->fd);
+		free_my_map(copy_map, rows, -2);
 		print_error("Exit is Not Reachable!!");
 	}
 }
@@ -75,7 +76,7 @@ t_position	get_entity_pos(char **map, int rows, char c)
 	return (entity);
 }
 
-void	check_map_if_enclosed_helper(char **my_map, int x, int y)
+void	check_map_if_enclosed_helper(char **my_map, int x, int y, int fd)
 {
 	int	i;
 
@@ -84,25 +85,25 @@ void	check_map_if_enclosed_helper(char **my_map, int x, int y)
 	{
 		if (my_map[i][y] != '1')
 		{
-			free_my_map(my_map, x);
+			free_my_map(my_map, x, fd);
 			print_error("Map Invalid , could be an enclosed Map!");
 		}
 		i++;
 	}
 }
 
-void	check_map_if_enclosed(char **my_map, int rows, int colums)
+void	check_map_if_enclosed(char **my_map, int rows, int colums, int fd)
 {
 	int	i;
 
 	i = 0;
-	check_map_if_enclosed_helper(my_map, rows, 0);
-	check_map_if_enclosed_helper(my_map, rows, colums - 1);
+	check_map_if_enclosed_helper(my_map, rows, 0, fd);
+	check_map_if_enclosed_helper(my_map, rows, colums - 1, fd);
 	while (i < colums)
 	{
 		if (my_map[0][i] != '1')
 		{
-			free_my_map(my_map, rows);
+			free_my_map(my_map, rows, fd);
 			print_error("Map Invalid , could be an enclosed Map!");
 		}
 		i++;
@@ -112,7 +113,7 @@ void	check_map_if_enclosed(char **my_map, int rows, int colums)
 	{
 		if (my_map[rows - 1][i] != '1')
 		{
-			free_my_map(my_map, rows);
+			free_my_map(my_map, rows, fd);
 			print_error("Map Invalid , could be an enclosed Map!");
 		}
 		i++;
