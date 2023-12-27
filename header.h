@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:46 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/26 21:28:39 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/27 09:53:18 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,6 @@ int					free_frames(t_program *prg, t_animation *animation,
 void				handle_frames_attack(t_program *prg);
 void				validate_and_init(char **my_map, int i, t_program *prg,
 						t_map *map);
-
+void				read_map_helper(char ***my_map, char *buffer, int i);
+void				*ft_realloc(void *ptr, size_t size, size_t old_size);
 #endif

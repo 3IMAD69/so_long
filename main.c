@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/26 21:47:23 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/27 10:01:23 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,12 @@ void	read_map(char *argv, t_program *prg, t_map *map)
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 		print_error("Map Not Found!");
-	while ((buffer = get_next_line(fd)))
+	buffer = get_next_line(fd);
+	while (buffer)
 	{
-		my_map = ft_realloc(my_map, (i + 1) * sizeof(char *), (i)
-				* sizeof(char *));
-		if (buffer[ft_strlen(buffer) - 1] == '\n')
-			buffer[ft_strlen(buffer) - 1] = '\0';
-		my_map[i] = (char *)malloc(sizeof(char) * ft_strlen(buffer) + 1);
-		if (!my_map[i])
-			print_error("Allocation failed");
-		ft_strlcpy(my_map[i], buffer, ft_strlen(buffer) + 1);
-		free(buffer);
+		read_map_helper(&my_map, buffer, i);
 		i++;
+		buffer = get_next_line(fd);
 	}
 	validate_and_init(my_map, i, prg, map);
 	close(fd);
