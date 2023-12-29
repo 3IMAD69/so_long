@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 14:36:35 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/29 17:17:14 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/29 21:13:07 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	bfs_checker(t_program *prg, int rows, int colums)
 		free_my_map(copy_map, rows, -2);
 	else
 	{
-		printf("Bad Map !\n");
 		free_my_map(prg->map.map_arr, rows, prg->fd);
 		free_my_map(copy_map, rows, -2);
 		print_error("Exit is Not Reachable!!");
@@ -96,5 +95,4 @@ void	check_map_if_enclosed(char **my_map, int rows, int colums, int fd)
 		}
 		i++;
 	}
-	printf("Border Fine!\n");
 }

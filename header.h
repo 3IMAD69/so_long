@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:46 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/29 17:21:47 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/29 21:05:35 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "includes/get_next_line/get_next_line.h"
 # include "includes/libft/libft.h"
+# include "includes/ft_printf/ft_printf.h"
 # include <math.h>
 # include <mlx.h>
 # include <stdarg.h>

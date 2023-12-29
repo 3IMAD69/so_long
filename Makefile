@@ -2,7 +2,9 @@ NAME = so_long
 SRC = main.c keyhook.c check_map.c check_map2.c check_map3.c display_map.c movement.c animation.c dolphin_moves.c free_my_game.c attack.c movement2.c init_game.c bfs.c \
 	includes/libft/ft_strnstr.c includes/libft/ft_strjoin.c includes/libft/ft_itoa.c includes/libft/ft_strdup.c includes/libft/ft_strlen.c includes/libft/ft_strlcpy.c includes/libft/ft_memcpy.c\
 	includes/libft/ft_strncmp.c includes/libft/ft_strchr.c includes/libft/ft_memset.c includes/libft/ft_calloc.c includes/libft/ft_bzero.c includes/get_next_line/get_next_line.c includes/get_next_line/get_next_line_utils.c \
-	includes/libft/ft_strlcat.c
+	includes/libft/ft_strlcat.c \
+	includes/ft_printf/ft_print_p.c includes/ft_printf/ft_print_str.c includes/ft_printf/ft_print_u.c includes/ft_printf/ft_print_x.c includes/ft_printf/ft_printf.c \
+	includes/ft_printf/ft_putchar_fd.c includes/ft_printf/ft_putnbr_fd.c includes/ft_printf/ft_putstr_fd.c 
 OBJ = $(SRC:.c=.o)
 
 FLAGS = -Werror -Wall -Wextra #-g -fsanitize=address

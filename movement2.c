@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 16:43:11 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/29 17:11:34 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/29 21:14:21 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	handle_all_move(t_program *prg)
 {
 	play_sound_async("sounds/move_sound.mp3");
 	prg->player.moves++;
-	printf("Moves -> %d!\n", prg->player.moves);
+	ft_printf("Moves -> %d!\n", prg->player.moves);
 }
 
 void	check_for_coins(t_program *prg, char next_place)

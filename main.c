@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/29 15:54:20 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/29 21:14:10 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	main(int argc, char *argv[])
 {
 	t_program	prg;
 
-	printf("Welcome to my game\n");
+	ft_printf("Welcome to my game\n");
 	if (argc < 2)
 		print_error("Missing map !!");
 	else if (argc > 2)
@@ -98,7 +98,7 @@ int	main(int argc, char *argv[])
 		print_error("Wrong Map Extention!");
 	read_map(argv[1], &prg, &(prg.map));
 	prg.mlx = mlx_init();
-	prg.win = mlx_new_window(prg.mlx, prg.height, prg.width, "Window xXx");
+	prg.win = mlx_new_window(prg.mlx, prg.height, prg.width, "So_long Samurai Edition");
 	prg.player.moves = 0;
 	prg.player.coins_collected = 0;
 	prg.frames = 0;

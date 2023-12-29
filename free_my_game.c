@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 15:03:38 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/27 21:44:28 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/29 21:12:11 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	print_error(char *str)
 {
-	printf("Error\n");
-	printf("%s", str);
+	ft_printf("Error\n");
+	ft_printf("%s", str);
 	exit(0);
 }
 
