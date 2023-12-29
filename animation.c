@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 14:19:22 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/27 21:44:57 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/29 17:21:28 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_animation(t_program *prg)
 		if (prg->frames % 5 == 0)
 		{
 			mlx_clear_window(prg->mlx, prg->win);
-			display_map(*prg, prg->map, &(prg->player));
+			display_map(*prg, prg->map);
 			prg->coin.offset = frm.coin_frame++ % 5;
 			prg->snow.offset = frm.snow_frame++ % 5;
 			prg->player_anim.offset = frm.player_frame++ % 8;

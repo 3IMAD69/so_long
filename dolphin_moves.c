@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:57:13 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/27 10:02:15 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/29 18:19:39 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	read_map_helper(char ***my_map, char *buffer, int i)
 {
 	*my_map = ft_realloc(*my_map, (i + 1) * sizeof(char *), (i)
 			* sizeof(char *));
+	if (*my_map == NULL)
+		print_error("Rellocation failed!");
 	if (buffer[ft_strlen(buffer) - 1] == '\n')
 		buffer[ft_strlen(buffer) - 1] = '\0';
 	(*my_map)[i] = (char *)malloc(sizeof(char) * ft_strlen(buffer) + 1);

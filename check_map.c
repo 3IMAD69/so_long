@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 14:20:50 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/27 21:41:54 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/29 18:26:38 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	free_my_map(char **my_map, int rows, int fd)
 
 void	validate_map(char **my_map, int rows, int fd)
 {
-	int	col_size;
-	int	i;
+	size_t	col_size;
+	int		i;
 
 	i = 1;
 	if (rows == 0)

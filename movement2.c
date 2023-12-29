@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 16:43:11 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/26 17:17:01 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/29 17:11:34 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,6 @@ void	handle_all_move(t_program *prg)
 
 void	check_for_coins(t_program *prg, char next_place)
 {
-	int		img_width;
-	int		img_height;
-	void	*img_ptr;
-	char	*coins_char;
-
 	if (next_place == 'C')
 	{
 		prg->player.coins_collected++;

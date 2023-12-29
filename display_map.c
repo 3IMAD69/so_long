@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 14:42:27 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/27 20:08:38 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/29 17:21:20 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	display_helper_with_frame(t_program prg, t_map map, char *characters,
 	}
 }
 
-char	get_enemy_type(t_program prg, t_map map)
+char	get_enemy_type(t_map map)
 {
 	int	i;
 	int	j;
@@ -74,7 +74,7 @@ void	diplay_enemy_and_player(t_program prg, t_map map)
 	int		j;
 	char	trap_type;
 
-	trap_type = get_enemy_type(prg, map);
+	trap_type = get_enemy_type(map);
 	i = 0;
 	while (i < map.rows)
 	{
@@ -97,7 +97,7 @@ void	diplay_enemy_and_player(t_program prg, t_map map)
 	}
 }
 
-void	display_map(t_program prg, t_map map, t_player *player)
+void	display_map(t_program prg, t_map map)
 {
 	display_helper_with_frame(prg, map, "0CPXHFYE", prg.wall_ptr);
 	display_helper_with_frame(prg, map, "1", prg.wall_darker_ptr);

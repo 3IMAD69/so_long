@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 16:33:25 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/26 17:16:45 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/29 17:20:25 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	handle_encounter_enemy_v(t_program *prg, char next_place, int offset,
 		}
 		if (my_place == 'H')
 			prg->map.map_arr[prg->player.y
-				- offset][prg->player.x] = get_enemy_type(*prg, prg->map);
+				- offset][prg->player.x] = get_enemy_type(prg->map);
 		else
 			prg->map.map_arr[prg->player.y - offset][prg->player.x] = '0';
 		prg->map.map_arr[prg->player.y][prg->player.x] = 'H';
@@ -32,7 +32,7 @@ int	handle_encounter_enemy_v(t_program *prg, char next_place, int offset,
 	if (my_place == 'H')
 	{
 		prg->map.map_arr[prg->player.y
-			- offset][prg->player.x] = get_enemy_type(*prg, prg->map);
+			- offset][prg->player.x] = get_enemy_type(prg->map);
 		prg->map.map_arr[prg->player.y][prg->player.x] = 'P';
 		return (1);
 	}
@@ -77,7 +77,7 @@ int	handle_encounter_enemy_h(t_program *prg, char next_place, int offset,
 			prg->game_status = 0;
 		if (my_place == 'H')
 			prg->map.map_arr[prg->player.y][prg->player.x
-				- offset] = get_enemy_type(*prg, prg->map);
+				- offset] = get_enemy_type(prg->map);
 		else
 			prg->map.map_arr[prg->player.y][prg->player.x - offset] = '0';
 		prg->map.map_arr[prg->player.y][prg->player.x] = 'H';
@@ -86,7 +86,7 @@ int	handle_encounter_enemy_h(t_program *prg, char next_place, int offset,
 	if (my_place == 'H')
 	{
 		prg->map.map_arr[prg->player.y][prg->player.x
-			- offset] = get_enemy_type(*prg, prg->map);
+			- offset] = get_enemy_type(prg->map);
 		prg->map.map_arr[prg->player.y][prg->player.x] = 'P';
 		return (1);
 	}

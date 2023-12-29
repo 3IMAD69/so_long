@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:46 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/27 21:44:31 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/29 17:21:47 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,21 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+typedef struct s_position
+{
+	int				x_row;
+	int				y_colum;
+}					t_position;
+
+typedef struct s_queue
+{
+	t_position		*queue;
+	int				front;
+	int				rear;
+	int				exit_found;
+	int				total_bfs_coins;
+}					t_queue;
 
 typedef struct s_animation
 {
@@ -39,6 +54,7 @@ typedef struct s_player
 	void			*img_ptr;
 	int				moves;
 	int				left_or_right;
+	// t_position		player_position;
 }					t_player;
 
 typedef struct s_map
@@ -87,12 +103,6 @@ typedef struct s_frames
 	int				death_frame;
 }					t_frames;
 
-typedef struct s_position
-{
-	int				x_row;
-	int				y_colum;
-}					t_position;
-
 int					key_hook(int keycode, t_program *prg);
 int					close_x(int keycode, t_program *prg);
 void				validate_map(char **my_map, int rows, int fd);
@@ -101,14 +111,11 @@ void				check_map_character(char **my_map, int rows,
 void				free_my_map(char **my_map, int rows, int fd);
 int					print_error(char *str);
 t_position			get_entity_pos(char **map, int rows, char c);
-void				floodfill_checker(t_program *prg, int rows, int colums,
-						t_position entity);
+void				bfs_checker(t_program *prg, int rows, int colums);
 void				check_map_if_enclosed(char **my_map, int rows, int colums,
 						int fd);
-void				check_if_all_coins_reachable(char **real_map,
-						char **fake_map, int rows, int fd);
 char				**create_copy_map(char **map, int rows, int colums);
-void				display_map(t_program prg, t_map map, t_player *player);
+void				display_map(t_program prg, t_map map);
 
 void				handle_all_move(t_program *prg);
 void				check_for_coins(t_program *prg, char next_place);
@@ -123,7 +130,7 @@ void				init_player_left(t_program *prg);
 void				init_player_right(t_program *prg);
 void				init_move_player(t_program *prg);
 void				init_second_enemy(char **my_map, int rows);
-char				get_enemy_type(t_program prg, t_map map);
+char				get_enemy_type(t_map map);
 void				move_dolphin(t_program *prg);
 void				init_dolphins_direction_arr(t_program *prg, char **my_map,
 						int rows);
@@ -139,4 +146,6 @@ void				validate_and_init(char **my_map, int i, t_program *prg,
 						t_map *map);
 void				read_map_helper(char ***my_map, char *buffer, int i);
 void				*ft_realloc(void *ptr, size_t size, size_t old_size);
+int					bfs(t_program *prg, char **map, int total_coins);
+int					get_coins_count(char **real_map, int rows);
 #endif
