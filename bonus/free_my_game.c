@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 15:03:38 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/30 10:27:47 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 18:07:26 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,5 @@ void	free_my_game(t_program *prg)
 	mlx_destroy_image(prg->mlx, prg->wall_ptr);
 	mlx_destroy_image(prg->mlx, prg->wall_darker_ptr);
 	mlx_destroy_window(prg->mlx, prg->win);
-	system("leaks so_long");
 	exit(0);
 }
