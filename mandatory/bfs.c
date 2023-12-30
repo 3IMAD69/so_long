@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 15:22:29 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/30 17:54:17 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 18:41:58 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ int	bfs(t_program *prg, char **map, int total_coins)
 	while (bfsq.front < bfsq.rear)
 	{
 		current = bfsq.queue[bfsq.front++];
+		bfs_helper(prg, &bfsq, current, map);
 		if (bfsq.exit_found == 1 && total_coins == bfsq.total_bfs_coins)
 		{
 			free(bfsq.queue);
 			return (1);
 		}
-		bfs_helper(prg, &bfsq, current, map);
 	}
 	free(bfsq.queue);
 	return (0);

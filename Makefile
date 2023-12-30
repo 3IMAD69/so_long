@@ -8,7 +8,7 @@ OBJM	= ${SRCM:.c=.o}
 
 OBJB	= ${SRCB:.c=.o} 
 
-CFLAGS	= -Wall -Werror -Wextra #-g -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra #-ggdb3 -fsanitize=address 
 CC		= cc
 
 NAME	= ./so_long

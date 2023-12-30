@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 16:33:25 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/29 17:20:25 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 19:24:14 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	handle_player_move_vertical(t_program *prg, int offset)
 	if (next_place == '1')
 		return (0);
 	check_for_coins(prg, next_place);
+	handle_all_move(prg);
 	if (check_for_ending(prg, next_place) == 1)
 	{
 		if (offset == 1)
@@ -61,7 +62,6 @@ int	handle_player_move_vertical(t_program *prg, int offset)
 			prg->map.map_arr[prg->player.y][prg->player.x] = 'P';
 			prg->map.map_arr[prg->player.y - offset][prg->player.x] = '0';
 		}
-		handle_all_move(prg);
 	}
 	return (1);
 }
@@ -122,6 +122,7 @@ int	handle_player_move_horizontal(t_program *prg, int offset)
 	if (next_place == '1')
 		return (0);
 	check_for_coins(prg, next_place);
+	handle_all_move(prg);
 	if (check_for_ending(prg, next_place) == 1)
 	{
 		handle_change_left_right(prg, offset);
@@ -130,7 +131,6 @@ int	handle_player_move_horizontal(t_program *prg, int offset)
 			prg->map.map_arr[prg->player.y][prg->player.x] = 'P';
 			prg->map.map_arr[prg->player.y][prg->player.x - offset] = '0';
 		}
-		handle_all_move(prg);
 	}
 	return (1);
 }
