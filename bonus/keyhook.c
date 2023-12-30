@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 16:10:35 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/29 21:13:36 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 11:04:35 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,9 @@ int	key_hook(int keycode, t_program *prg)
 	return (0);
 }
 
-int	close_x(int keycode, t_program *prg)
+int	close_prg(t_program *prg)
 {
-	ft_printf("%d => %d => cloosing", keycode, prg->frames);
+	ft_printf("cloosing ...\n");
+	free_my_game(prg);
 	return (0);
 }
