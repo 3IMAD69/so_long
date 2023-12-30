@@ -23,7 +23,6 @@ bonus : ${NAME_BONUS}
 
 ${LIBFTA} : 
 	make -C includes/libft
-	make -C includes/libft clean
 
 ${NAME}:	${OBJM} ${LIBFTA}
 	${CC} ${CFLAGS} ${OBJM} ${LIBFTA} ${LINKS} -o ${NAME}
