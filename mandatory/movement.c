@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 10:19:15 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/30 11:11:56 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 14:29:10 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	handle_all_move(t_program *prg)
 {
-	play_sound_async("sounds/move_sound.mp3");
+	play_sound_async("./mandatory/sounds/move_sound.mp3");
 	prg->player.moves++;
 	printf("Moves -> %d!\n", prg->player.moves);
 }
@@ -24,7 +24,7 @@ void	check_for_coins(t_program *prg, char next_place)
 	if (next_place == 'C')
 	{
 		prg->player.coins_collected++;
-		play_sound_async("sounds/collect_coin.mp3");
+		play_sound_async("./mandatory/sounds/collect_coin.mp3");
 	}
 }
 
@@ -32,13 +32,13 @@ int	check_for_ending(t_program *prg, char next_place)
 {
 	if (next_place == 'E' && prg->player.coins_collected == prg->map.coin)
 	{
-		play_sound_async("sounds/portal_closed.mp3");
+		play_sound_async("./mandatory/sounds/portal_closed.mp3");
 		printf("You won!");
 		free_my_game(prg);
 	}
 	else if (next_place == 'E' && prg->player.coins_collected != prg->map.coin)
 	{
-		play_sound_async("sounds/portal_looked.mp3");
+		play_sound_async("./mandatory/sounds/portal_looked.mp3");
 		return (0);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 14:19:22 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/29 17:21:28 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 14:30:05 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	handle_enemy(t_program *prg, t_frames *frm)
 void	handle_end_game(t_program *prg, int *death_frame)
 {
 	if (*death_frame == 0)
-		play_sound_async("sounds/you-died.mp3");
+		play_sound_async("./bonus/sounds/you-died.mp3");
 	mlx_clear_window(prg->mlx, prg->win);
 	mlx_put_image_to_window(prg->mlx, prg->win,
 		prg->death_scene.frames_arr[*death_frame], ((prg->map.colums) - 3.75)

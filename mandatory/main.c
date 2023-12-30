@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/30 11:06:26 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 14:28:38 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,16 @@ void	init_game(t_program *prg)
 	int	image_width;
 	int	image_height;
 
-	prg->wall = mlx_xpm_file_to_image(prg->mlx, "./textures/wall.xpm",
+	prg->wall = mlx_xpm_file_to_image(prg->mlx, "./mandatory/textures/wall.xpm",
 			&image_width, &image_height);
-	prg->wall2 = mlx_xpm_file_to_image(prg->mlx, "./textures/wall2.xpm",
+	prg->wall2 = mlx_xpm_file_to_image(prg->mlx, "./mandatory/textures/wall2.xpm",
 			&image_width, &image_height);
-	prg->coin = mlx_xpm_file_to_image(prg->mlx, "./textures/coin.xpm",
+	prg->coin = mlx_xpm_file_to_image(prg->mlx, "./mandatory/textures/coin.xpm",
 			&image_width, &image_height);
-	prg->door = mlx_xpm_file_to_image(prg->mlx, "./textures/door.xpm",
+	prg->door = mlx_xpm_file_to_image(prg->mlx, "./mandatory/textures/door.xpm",
 			&image_width, &image_height);
 	prg->player_texture = mlx_xpm_file_to_image(prg->mlx,
-			"./textures/player.xpm", &image_width, &image_height);
+			"./mandatory/textures/player.xpm", &image_width, &image_height);
 }
 
 int	main(int argc, char *argv[])

@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 14:20:25 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/27 14:03:31 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 14:30:18 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	attack_vertical(t_program *prg, int offset)
 			init_player_attack_right(prg);
 		else
 			init_player_attack_left(prg);
-		play_sound_async("./sounds/katana_sound.mp3");
+		play_sound_async("./bonus/sounds/katana_sound.mp3");
 		prg->map.map_arr[prg->player.y + offset][prg->player.x] = '0';
 	}
 }
@@ -43,7 +43,7 @@ void	attack_horizontal(t_program *prg, int offset)
 			init_player_attack_right(prg);
 		else
 			init_player_attack_left(prg);
-		play_sound_async("./sounds/katana_sound.mp3");
+		play_sound_async("./bonus/sounds/katana_sound.mp3");
 		prg->map.map_arr[prg->player.y][prg->player.x + offset] = '0';
 	}
 }
