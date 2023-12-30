@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 15:22:29 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/29 17:11:50 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 17:54:17 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	initialize_offsets(int *dx, int *dy)
 	dy[3] = 1;
 }
 
-void	bfs_helper(t_program *prg, t_queue *bfsq, t_position current,
-		char **map)
+void	bfs_helper(t_program *prg, t_queue *bfsq, t_position cur, char **map)
 {
 	int			i;
 	int			dx[4];
@@ -36,19 +35,18 @@ void	bfs_helper(t_program *prg, t_queue *bfsq, t_position current,
 	initialize_offsets(dx, dy);
 	while (++i < 4)
 	{
-		if (current.x_row + dx[i] >= 0 && current.x_row + dx[i] < prg->map.rows
-			&& current.y_colum + dy[i] >= 0 && current.y_colum
-			+ dy[i] < prg->map.colums && map[current.x_row
-				+ dx[i]][current.y_colum + dy[i]] != '7' && map[current.x_row
-				+ dx[i]][current.y_colum + dy[i]] != '1')
+		if (map[cur.x_row + dx[i]][cur.y_colum + dy[i]] == 'E')
+			bfsq->exit_found = 1;
+		if (cur.x_row + dx[i] >= 0 && cur.x_row + dx[i] < prg->map.rows
+			&& cur.y_colum + dy[i] >= 0 && cur.y_colum + dy[i] < prg->map.colums
+			&& map[cur.x_row + dx[i]][cur.y_colum + dy[i]] != '7'
+			&& map[cur.x_row + dx[i]][cur.y_colum + dy[i]] != '1'
+			&& map[cur.x_row + dx[i]][cur.y_colum + dy[i]] != 'E')
 		{
-			if (map[current.x_row + dx[i]][current.y_colum + dy[i]] == 'C')
+			if (map[cur.x_row + dx[i]][cur.y_colum + dy[i]] == 'C')
 				bfsq->total_bfs_coins++;
-			if (map[current.x_row + dx[i]][current.y_colum + dy[i]] == 'E')
-				bfsq->exit_found = 1;
-			map[current.x_row + dx[i]][current.y_colum + dy[i]] = '7';
-			neighbor = (t_position){current.x_row + dx[i], current.y_colum
-				+ dy[i]};
+			map[cur.x_row + dx[i]][cur.y_colum + dy[i]] = '7';
+			neighbor = (t_position){cur.x_row + dx[i], cur.y_colum + dy[i]};
 			bfsq->queue[bfsq->rear++] = neighbor;
 		}
 	}
@@ -62,8 +60,8 @@ int	bfs(t_program *prg, char **map, int total_coins)
 	ft_memset(&bfsq, 0, sizeof(bfsq));
 	bfsq.queue = (t_position *)malloc(prg->map.rows * prg->map.colums
 			* sizeof(t_position));
-	map[prg->player.x][prg->player.x] = '7';
-	bfsq.queue[bfsq.rear++] = (t_position){prg->player.x, prg->player.y};
+	map[prg->player.y][prg->player.x] = '7';
+	bfsq.queue[bfsq.rear++] = (t_position){prg->player.y, prg->player.x};
 	while (bfsq.front < bfsq.rear)
 	{
 		current = bfsq.queue[bfsq.front++];

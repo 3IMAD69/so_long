@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 14:36:35 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/29 21:13:07 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 17:56:43 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	bfs_checker(t_program *prg, int rows, int colums)
 	{
 		free_my_map(prg->map.map_arr, rows, prg->fd);
 		free_my_map(copy_map, rows, -2);
-		print_error("Exit is Not Reachable!!");
+		print_error("Exit or Coins are Not Reachable!!");
 	}
 }
 

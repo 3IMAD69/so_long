@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 14:19:22 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/30 14:30:05 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 16:05:26 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	handle_end_game(t_program *prg, int *death_frame)
 	{
 		sleep(2);
 		free_my_game(prg);
-		system("leaks so_long");
 		exit(0);
 	}
 	else

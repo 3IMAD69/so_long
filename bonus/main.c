@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/30 14:32:08 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 16:09:18 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,14 @@ void	init_all_entities(t_program *prg)
 {
 	init_entity(prg, &(prg->coin), "./bonus/animation/coin/coin", 4);
 	init_entity(prg, &(prg->snow), "./bonus/animation/snow/snow", 4);
-	init_entity(prg, &(prg->enemy[0]), "./bonus/animation/enemy/bear_trap/bear", 17);
-	init_entity(prg, &(prg->enemy[1]), "./bonus/animation/enemy/fire_trap/fire", 17);
-	init_entity(prg, &(prg->death_scene), "./bonus/animation/death_scene/death_scene",
-		125);
-	init_entity(prg, &(prg->dolphin_anim), "./bonus/animation/enemy/dolphin/dolphin",
-		6);
+	init_entity(prg, &(prg->enemy[0]), "./bonus/animation/enemy/bear_trap/bear",
+		17);
+	init_entity(prg, &(prg->enemy[1]), "./bonus/animation/enemy/fire_trap/fire",
+		17);
+	init_entity(prg, &(prg->death_scene),
+		"./bonus/animation/death_scene/death_scene", 125);
+	init_entity(prg, &(prg->dolphin_anim),
+		"./bonus/animation/enemy/dolphin/dolphin", 6);
 	init_entity(prg, &(prg->door_animation), "./bonus/animation/door/door", 58);
 }
 

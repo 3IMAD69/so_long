@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 10:30:23 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/30 10:47:14 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 16:05:02 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	key_hook(int keycode, t_program *prg)
 int	close_prg(t_program *prg)
 {
 	free_my_map(prg->map.map_arr, prg->map.rows, prg->fd);
-	printf("closing the program\n");
+	ft_printf("closing the program\n");
 	exit(0);
 }
 
@@ -53,13 +53,12 @@ void	free_my_game(t_program *prg)
 	mlx_destroy_image(prg->mlx, prg->door);
 	mlx_destroy_image(prg->mlx, prg->player_texture);
 	mlx_destroy_window(prg->mlx, prg->win);
-	system("leaks so_long");
 	exit(0);
 }
 
 int	print_error(char *str)
 {
-	printf("Error\n");
-	printf("%s", str);
+	ft_printf("Error\n");
+	ft_printf("%s", str);
 	exit(0);
 }

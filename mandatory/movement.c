@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 10:19:15 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/30 14:29:10 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 16:01:53 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	handle_all_move(t_program *prg)
 {
 	play_sound_async("./mandatory/sounds/move_sound.mp3");
 	prg->player.moves++;
-	printf("Moves -> %d!\n", prg->player.moves);
+	ft_printf("Moves -> %d!\n", prg->player.moves);
 }
 
 void	check_for_coins(t_program *prg, char next_place)
@@ -33,7 +33,7 @@ int	check_for_ending(t_program *prg, char next_place)
 	if (next_place == 'E' && prg->player.coins_collected == prg->map.coin)
 	{
 		play_sound_async("./mandatory/sounds/portal_closed.mp3");
-		printf("You won!");
+		ft_printf("You won!");
 		free_my_game(prg);
 	}
 	else if (next_place == 'E' && prg->player.coins_collected != prg->map.coin)

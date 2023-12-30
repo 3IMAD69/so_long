@@ -6,16 +6,14 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:46 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/30 11:04:47 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 14:39:45 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
 
-# include "includes/ft_printf/ft_printf.h"
-# include "includes/get_next_line/get_next_line.h"
-# include "includes/libft/libft.h"
+# include "../includes/libft/libft.h"
 # include <math.h>
 # include <mlx.h>
 # include <stdarg.h>

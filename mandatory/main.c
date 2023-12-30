@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:09:37 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/30 14:28:38 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 16:09:04 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	init_game(t_program *prg)
 
 	prg->wall = mlx_xpm_file_to_image(prg->mlx, "./mandatory/textures/wall.xpm",
 			&image_width, &image_height);
-	prg->wall2 = mlx_xpm_file_to_image(prg->mlx, "./mandatory/textures/wall2.xpm",
-			&image_width, &image_height);
+	prg->wall2 = mlx_xpm_file_to_image(prg->mlx,
+			"./mandatory/textures/wall2.xpm", &image_width, &image_height);
 	prg->coin = mlx_xpm_file_to_image(prg->mlx, "./mandatory/textures/coin.xpm",
 			&image_width, &image_height);
 	prg->door = mlx_xpm_file_to_image(prg->mlx, "./mandatory/textures/door.xpm",
@@ -84,7 +84,7 @@ int	main(int argc, char *argv[])
 {
 	t_program	prg;
 
-	printf("Welcome to my game\n");
+	ft_printf("Welcome to my game\n");
 	if (argc < 2)
 		print_error("Missing map !!");
 	else if (argc > 2)

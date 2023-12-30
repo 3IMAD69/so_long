@@ -6,7 +6,7 @@
 /*   By: idhaimy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:14:01 by idhaimy           #+#    #+#             */
-/*   Updated: 2023/12/30 11:55:51 by idhaimy          ###   ########.fr       */
+/*   Updated: 2023/12/30 14:57:35 by idhaimy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "../get_next_line/get_next_line.h"
+# include "../ft_printf/ft_printf.h"
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

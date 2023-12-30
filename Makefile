@@ -10,11 +10,16 @@ OBJB	= ${SRCB:.c=.o}
 
 CFLAGS	= -Wall -Werror -Wextra #-g -fsanitize=address
 CC		= cc
+
 NAME	= ./so_long
+NAME_BONUS = ./so_long_bonus
+
 LINKS	= -lmlx -framework OpenGL -framework AppKit
 LIBFTA 	= ./includes/libft/libft.a
 
 all:		${NAME}
+
+bonus : ${NAME_BONUS}
 
 ${LIBFTA} : 
 	make -C includes/libft
@@ -23,15 +28,16 @@ ${LIBFTA} :
 ${NAME}:	${OBJM} ${LIBFTA}
 	${CC} ${CFLAGS} ${OBJM} ${LIBFTA} ${LINKS} -o ${NAME}
 
-bonus:		${OBJB} ${LIBFTA}
-	${CC} ${CFLAGS} ${OBJB} ${LIBFTA} ${LINKS} -o ${NAME}
+$(NAME_BONUS) :		${OBJB} ${LIBFTA}
+	${CC} ${CFLAGS} ${OBJB} ${LIBFTA} ${LINKS} -o $(NAME_BONUS)
 	
 clean:
 	rm -f ${OBJM} ${OBJB}
 
 fclean:		clean
-	rm -f ${NAME}
+	rm -f ${NAME} $(NAME_BONUS)
 
 re:			fclean all
 
+.SECONDARY : ${OBJB} ${OBJM}
 .PHONY: all bonus clean fclean re
